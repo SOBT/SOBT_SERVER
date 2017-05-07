@@ -11,11 +11,12 @@ import org.springframework.oxm.Unmarshaller;
 
 import sobt.sql.service.jaxb.SqlType;
 import sobt.sql.service.jaxb.Sqlmap;
+import sobt.util.SOBTConstant;
 
 public class OxmSqlReader implements SqlReader {
 	
 	private Unmarshaller unmarshaller;
-	private Resource sqlmap = new ClassPathResource("sqlmap.xml");
+	private Resource sqlmap = new ClassPathResource(SOBTConstant.SQLMAP_FILE_NAME);
 	
 	public void setUnmarshaller(Unmarshaller unmarshaller){
 		this.unmarshaller = unmarshaller;
