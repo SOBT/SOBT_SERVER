@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+  	http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<!-- annotation 사용을 위해 설정  -->
+	<context:annotation-config />
+
+
+	<!-- unmarshaller 등록  -->
+	<bean id="unmarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="contextPath" value="sobt.sql.service.jaxb" />
+	</bean>
+
+	<!-- SqlReader 등록 -->
+	<bean id = "sqlReader" class = "sobt.sql.service.OxmSqlReader">
+		<property name = "unmarshaller" ref = "unmarshaller"/>
+	</bean>
+	<!-- SqlRegistry 등록 -->
+	<bean id = "sqlRegistry" class = "sobt.sql.service.HashMapSqlRegistry"/>
+
+	<!-- SqlService 등록 -->
+	<bean id = "sqlService" class = "sobt.sql.service.BasicSqlService">
+		<property name = "sqlReader" ref = "sqlReader"/>
+		<property name = "sqlRegistry" ref ="sqlRegistry"/>
+	</bean>
+
+  <!-- DB Connection  -->
+	<bean id = "dataSource" class ="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name = "driverClass" value ="com.mysql.jdbc.Driver"/>
+		<property name = "url" value = "jdbc:mysql://localhost:3306/SOBT?useSSL=false"/>
+		<property name = "username" value = "root"/>
+		<property name = "password" value = "song9207108"/>
+	</bean>
+
+</beans>
