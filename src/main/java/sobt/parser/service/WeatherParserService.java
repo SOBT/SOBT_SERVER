@@ -16,11 +16,11 @@ public class WeatherParserService implements ParserService{
 			return data.getError().getMessage();
 		}
 		
-		String sentence = info.getStation().getName() + "ÀÇ ³¯¾¾\n"
-						  + "ÇÏ´Ã : "+info.getSky().getName() + "\n"
-					   	  + "ÇöÀç ±â¿Â : "+info.getTemperature().getTc()+ "\n"
-					   	  + "ÃÖ°í ±â¿Â : "+info.getTemperature().getTmax()+ "\n"
-					   	  + "ÃÖÀú ±â¿Â : "+info.getTemperature().getTmin()+ "\n";
+		String sentence = info.getStation().getName() + "ì˜ ë‚ ì”¨\n"
+						  + "í˜„ì¬ ë‚ ì”¨: "+info.getSky().getName() + "\n"
+					   	  + "í˜„ì¬ ê¸°ì˜¨ : "+info.getTemperature().getTc()+ "\n"
+					   	  + "ìµœê³  ê¸°ì˜¨ : "+info.getTemperature().getTmax()+ "\n"
+					   	  + "ìµœì € ê¸°ì˜¨ : "+info.getTemperature().getTmin()+ "\n";
 		return sentence;
 	}
 

@@ -20,6 +20,7 @@ public class ApiTest {
 		((BasicWeatherApiManager)a).setAppkey(SOBTConstant.WEATHER_API_APP_KEY);;
 		((BasicWeatherApiManager)a).setHttpService(new ApacheHttpService());
 		((BasicWeatherApiManager)a).setParserService(new WeatherParserService());
-		System.out.print(a.getWeatherMin("¼­¿ï", "³ë¿ø±¸", "¿ù°èµ¿"));
+		
+		System.out.print(a.getWeatherMin("ì„œìš¸", "ë…¸ì›êµ¬", "ì›”ê³„ë™"));
 	}
 }
