@@ -24,7 +24,6 @@
   <!-- WeatherApiManager 등록 -->
   <bean id = "parserService" class = "sobt.parser.service.WeatherParserService"/>
 
-
 	<!-- userDao 등록 -->
 	<bean id = "userDao" class = "sobt.dao.user.JdbcUserDao">
 		<property name = "dataSource" ref="dataSource"/>

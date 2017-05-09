@@ -21,11 +21,11 @@ public class ApiTest {
 	
 	@Autowired
 	private WeatherApiManager weatehrApiManager;
+	
+	
 	@Test
 	public void ApiTest(){
 	
-		
-		
 		System.out.print(weatehrApiManager.getWeatherMin("서울", "노원구", "월계동"));
 	}
 }

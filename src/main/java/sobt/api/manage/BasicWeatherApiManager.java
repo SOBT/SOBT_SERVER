@@ -32,7 +32,7 @@ public class BasicWeatherApiManager implements WeatherApiManager{
 		
 		String url = String.format(SOBTConstant.WEATHER_API_URL_MIN, city, county, village);
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("AppKey", appKey);
+		map.put("AppKey", SOBTConstant.WEATHER_API_APP_KEY);
 		return parserService.Parse(httpService.getData(url, map));
 	}
 
@@ -40,7 +40,7 @@ public class BasicWeatherApiManager implements WeatherApiManager{
 	public String getWeatherLoc(double lat, double lon) {
 		String url = String.format(SOBTConstant.WEATHER_API_URL_LOC, lat, lon);
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("AppKey", appKey);
+		map.put("AppKey", SOBTConstant.WEATHER_API_APP_KEY);
 		return parserService.Parse(httpService.getData(url, map));
 	}
 	
