@@ -15,7 +15,7 @@
 	</properties>
 	<dependencies>
 		<!-- Spring -->
-		<dependency>
+		<dependency> 
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${org.springframework-version}</version>
@@ -132,24 +132,24 @@
 
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-oxm -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-oxm</artifactId>
-			<version>4.3.5.RELEASE</version>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-oxm</artifactId>
+		    <version>4.3.5.RELEASE</version>
 		</dependency>
 
-
+		
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>4.3.5.RELEASE</version>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <version>4.3.5.RELEASE</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>4.3.5.RELEASE</version>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-jdbc</artifactId>
+		    <version>4.3.5.RELEASE</version>
 		</dependency>
 
 		<dependency>
@@ -158,13 +158,12 @@
 			<version>5.1.38</version>
 		</dependency>
 
-		<!-- http Connect -->
+		<!-- Okhttp3 http 처리 -->
 		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.5.2</version>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>3.6.0</version>
 		</dependency>
-
 
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<dependency>

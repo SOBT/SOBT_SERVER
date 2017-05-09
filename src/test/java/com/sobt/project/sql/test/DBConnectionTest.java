@@ -24,6 +24,6 @@ public class DBConnectionTest {
 	
 	@Test
 	public void getConnection() throws SQLException{
-		assertThat(dataSource,nullValue());
+		assertThat(dataSource,notNullValue());
 	}
 }
