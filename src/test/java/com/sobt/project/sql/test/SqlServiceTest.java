@@ -29,9 +29,10 @@ public class SqlServiceTest {
 	
 	@Test
 	public void sqlRegistryTest(){
+		//등록 
 		sqlRegistry.register("test", "test");
 		sqlRegistry.register("test1", "test1");
-		
+		//찾기 
 		assertThat(sqlRegistry.findSql("test"),is("test"));
 		assertThat(sqlRegistry.findSql("test1"),is("test1"));
 	}

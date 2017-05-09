@@ -7,6 +7,6 @@ public interface HttpService {
 	// Connect url and get response data
 	public String getData(String url);
 	
-	// Connect url and get response data whit header by keyname and keyvalue
+	// Connect url and get response data if u need adding header 
 	public String getData(String url, HashMap<String, String> map);
 }
