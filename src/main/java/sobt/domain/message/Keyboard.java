@@ -1,4 +1,4 @@
-package com.sobt.domain;
+package sobt.domain.message;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,25 +12,30 @@ import com.sobt.domain.MessageVo;
 import com.sobt.domain.User;
 
 import sobt.api.manage.WeatherApiManager;
+import sobt.domain.message.Message;
+import sobt.domain.message.MessageService;
+import sobt.user.service.UserService;
 
 @Controller
 public class MessageController {
-
 	@Autowired
-	private MessageVo messageVo;
+	MessageService msgService;
 	@Autowired
 	private WeatherApiManager weatehrApiManager;
+	@Autowired 
+	private UserService userService;
 
 	@RequestMapping(value = "/message", method = RequestMethod.POST, headers = "Accept=application/json; charset=utf-8")
 	public @ResponseBody MessageVo message(@RequestBody User user) throws Exception {
+		userService.addUser(user.getUser_key(), user.getContent(), user.getType());
 		String text = user.getContent();
-		messageVo.setText(text);
-		if (text.equals("날씨 정보")){
-			messageVo.setText(weatehrApiManager.getWeatherMin("서울", "노원구", "월계동"));
-		}else{
-			messageVo.setMessageBtn("github 바로가기", "https://github.com/SOBT/SOBT_SERVER");
+		Message message = null;
+		if( text.equals("날씨 정보")){
+			message = msgService.makeMessage(weatehrApiManager.getWeatherMin("서울", "노원구", "월계동"));
 		}
-		messageVo.setKeyboard_buttons("날씨 정보", "지하철 정보", "영화 정보");
-		return messageVo;
+		
+		MessageVo msgVo = new MessageVo();
+		msgVo.setMessage(message);
+		return msgVo;
 	}
 }
