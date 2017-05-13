@@ -67,5 +67,13 @@
 		<property name = "username" value = "root"/>
 		<property name = "password" value = "song9207108"/>
 	</bean>
+	
+	<!-- 카카오톡 메시지 객체 -->
+ 	<bean id="messageVo" class="com.sobt.domain.MessageVo"></bean>
+ 	<bean id="message" class="com.sobt.domain.Message"></bean>
+ 	<bean id="messageButton" class="com.sobt.domain.MessageButton"></bean>
+ 	<bean id="keyboard" class="com.sobt.domain.Keyboard"></bean>
+ 	<bean id="photo" class="com.sobt.domain.Photo"></bean>
+ 	<bean id="user" class="com.sobt.domain.User"></bean>
 
 </beans>
