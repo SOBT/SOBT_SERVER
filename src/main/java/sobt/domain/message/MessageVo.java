@@ -1,9 +1,6 @@
-package com.sobt.domain;
+package sobt.domain.message;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import sobt.domain.message.Keyboard;
-import sobt.domain.message.Message;
 
 /**
  * 응답 객체 ( Response object )

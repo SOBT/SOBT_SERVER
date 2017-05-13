@@ -1,7 +1,7 @@
 package com.sobt.domain;
 
 public class Photo {
-	String url;
+	String url = "null";
 	int width;
 	int height;
 	
