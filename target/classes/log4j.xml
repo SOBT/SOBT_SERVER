@@ -32,17 +32,6 @@
 		<level value="info" />
 	</logger>
 
-	 <appender name="rollingFile" class="org.apache.log4j.DailyRollingFileAppender">
-	    <param name="File" value="/all.log"/>
-	        <param name="Append" value="true"/>
-	        <!-- param name="MaxFileSize" value="100MB"/ -->
-	        <!-- param name="MaxBackupIndex" value="2"></param -->
-	        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
-	        <layout class="org.apache.log4j.PatternLayout">
-	        <param name="ConversionPattern" value="%d %p [%C{10}] %m [%X{userId}]%n" />
-	        </layout>
-	    </appender>
-
 	<!-- Root Logger -->
 	<root>
 		<priority value="warn" />
