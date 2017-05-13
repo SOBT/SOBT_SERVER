@@ -24,7 +24,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-	<context:component-scan base-package="com.sobt.project" />
+	<context:component-scan base-package="com.sobt.*" />
 
 	<!-- Spring 과 json과의 연동 설정 -->
 	<beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
