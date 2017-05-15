@@ -1,7 +1,5 @@
 package sobt.domain.message;
 
-import com.sobt.domain.Photo;
-
 public class Msg_photo implements Message {
 	Photo photo;
 	

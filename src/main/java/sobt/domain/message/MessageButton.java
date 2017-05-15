@@ -1,4 +1,4 @@
-package com.sobt.domain;
+package sobt.domain.message;
 
 public class MessageButton {
 	String label;
