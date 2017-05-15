@@ -1,7 +1,8 @@
-# SOBT_SERVER
+SOBT_SERVER
+=======================================================
 
 
-##[ MessageService 사용법 ]
+## MessageService 사용법
 <pre><code>@Autowired
 MessageService msgService;
 
@@ -16,5 +17,4 @@ public MessageVo yourMethod(String param){
   msgVo.setKeyboard(keyboard);
 
   return msgVo;
-}
-</code></pre>
+}</code></pre>
