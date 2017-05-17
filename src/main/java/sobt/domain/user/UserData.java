@@ -3,8 +3,20 @@ package sobt.domain.user;
 public class UserData {
 	private int seq;
 	private String userId;
-	private String userText;
+	private String type;
+	private String userContent;
 	private String rgDt;
+	
+	public UserData(){
+		
+	}
+	
+	public UserData(String userId, String userText, String type){
+		this.userId = userId;
+		this.userContent = userText;
+		this.type = type;
+	}
+	
 	public int getSeq() {
 		return seq;
 	}
@@ -17,12 +29,20 @@ public class UserData {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getUserText() {
-		return userText;
+	public String getUserContent() {
+		return userContent;
 	}
-	public void setUserText(String userText) {
-		this.userText = userText;
+	public void setUserContent(String userText) {
+		this.userContent = userText;
 	}
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public String getRgDt() {
 		return rgDt;
 	}
