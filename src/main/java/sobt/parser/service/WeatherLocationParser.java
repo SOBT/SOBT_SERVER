@@ -5,12 +5,13 @@ import com.google.gson.Gson;
 import sobt.domain.weather.WeatherInfo;
 import sobt.domain.weather.WeatherResponse;
 
-public class WeatherParserService implements ParserService{
+public class WeatherLocationParser implements ParserService{
 
 	@Override
 	public String Parse(String json) {
-		Gson gson = new Gson();
-		WeatherResponse data = gson.fromJson(json, WeatherResponse.class);
+		
+		WeatherResponse data = (new UnmarshallJsonTemplate<WeatherResponse>()).ReturnObjectTemplate(json, new WeatherResponse());
+		
 		WeatherInfo info = data.getWeather().getMinutely().get(0);
 		if(data.getError()!= null){
 			return data.getError().getMessage();
@@ -20,7 +21,7 @@ public class WeatherParserService implements ParserService{
 						  + "현재 날씨 → "+info.getSky().getName() + "\n"
 					   	  + "현재 기온 → "+info.getTemperature().getTc()+ "\n"
 					   	  + "최고 기온 → "+info.getTemperature().getTmax()+ "\n"
-					   	  + "최저 기온 → "+info.getTemperature().getTmin();
+					   	  + "최저 기온 → "+info.getTemperature().getTmin()+ "\n";
 		return sentence;
 	}
 

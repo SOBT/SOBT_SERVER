@@ -1,12 +1,10 @@
 package sobt.api.manage;
 
-import java.util.HashMap;
-
+import sobt.domain.weather.WeatherAllPlaceData;
 import sobt.http.service.HttpService;
-import sobt.http.service.ApacheHttpService;
-import sobt.parser.service.AirQualityparserService;
 import sobt.parser.service.ParserService;
-import sobt.parser.service.WeatherParserService;
+import sobt.parser.service.WeatherAllPlaceParser;
+import sobt.parser.service.WeatherLocationParser;
 import sobt.util.SOBTConstant;
 
 public class BasicWeatherApiManager implements WeatherApiManager{
@@ -31,19 +29,18 @@ public class BasicWeatherApiManager implements WeatherApiManager{
 	public String getWeatherMin(String city, String county, String village) {
 		
 		String url = String.format(SOBTConstant.WEATHER_API_URL_MIN, city, county, village);
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("AppKey", appKey);
-		return parserService.Parse(httpService.getData(url, map));
+		parserService = new WeatherLocationParser();
+		
+		return parserService.Parse(httpService.DoHttpGet(url, "AppKey", appKey));
 	}
 
 	@Override
-	public String getWeatherLoc(double lat, double lon) {
-		String url = String.format(SOBTConstant.WEATHER_API_URL_LOC, lat, lon);
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("AppKey", appKey);
-		return parserService.Parse(httpService.getData(url, map));
+	public String getWeatherAll() {
+
+		String url = SOBTConstant.WEATHER_API_URL_ALL;
+		parserService = new WeatherAllPlaceParser();
+		
+		return parserService.Parse(httpService.DoHttpGet(url));
 	}
-	
-	
 
 }

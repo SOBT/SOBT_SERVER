@@ -1,12 +1,13 @@
 package sobt.http.service;
 
-import java.util.HashMap;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
 
 public interface HttpService {
 	
-	// Connect url and get response data
-	public String getData(String url);
 	
-	// Connect url and get response data if u need adding header 
-	public String getData(String url, HashMap<String, String> map);
+	public String DoHttpPost(String url,final List<NameValuePair> urlParameters, final String ...head);
+	public String DoHttpGet(String url, final String ...head);
+	
 }

@@ -34,7 +34,7 @@ public class MessageController {
 		MessageVo msgVo = new MessageVo();
 		Message message = msgService.makeMessage("해당 기능은 아직 준비 중입니다!");
 		if( text.equals("날씨 정보")){
-			message = msgService.makeMessage(weatehrApiManager.getWeatherMin("서울", "노원구", "월계동"));
+			message = msgService.makeMessage(weatehrApiManager.getWeatherAll());
 			// 사용자로부터 버튼 방식으로 응답 받는 예시
 			Keyboard keyboard = msgService.makeKeyboard("날씨 정보","지하철 정보","영화 정보");
 			msgVo.setKeyboard(keyboard);

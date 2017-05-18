@@ -8,9 +8,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import sobt.api.manage.*;
-import sobt.http.service.ApacheHttpService;
-import sobt.parser.service.WeatherParserService;
-import sobt.util.SOBTConstant;
 
 import static org.hamcrest.CoreMatchers.*;
 
@@ -23,8 +20,12 @@ public class ApiTest {
 	private WeatherApiManager weatehrApiManager;
 	@Test
 	public void ApiTest(){
-	
-		
+//		ApiUmarshal<WeatherAllPlaceData> api = new ApiUmarshal<WeatherAllPlaceData>();
+//		WeatherRssData data = api.DoUnmarshal(new ApacheHttpService().DoHttpGet("http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=108"), new WeatherRssData());
+//		System.out.println(data.getName().getName());
 		System.out.print(weatehrApiManager.getWeatherMin("서울", "노원구", "월계동"));
+		System.out.println("");
+		System.out.println(weatehrApiManager.getWeatherAll());
+
 	}
 }
