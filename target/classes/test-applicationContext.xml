@@ -15,15 +15,11 @@
   <!-- WeatherApiManager 등록 -->
   <bean id = "weatherApiManager" class = "sobt.api.manage.BasicWeatherApiManager">
   	<property name = "httpService" ref= "httpService"/>
-  	<!-- <property name = "parserService" ref= "parserService"/> -->
   	<property name = "appkey" value ="1c33a135-5e89-34c1-baf9-ba0d453a29e8"/>
   </bean>
 
-  <!-- WeatherApiManager 등록 -->
+  <!-- httpService 등록 -->
   <bean id = "httpService" class = "sobt.http.service.ApacheHttpService"/>
-
-  <!-- WeatherApiManager 등록 -->
-  <!-- <bean id = "parserService" class = "sobt.parser.service.WeatherAllPlaceParser"/> -->
 
 	<!-- userDao 등록 -->
 	<bean id = "userDao" class = "sobt.dao.user.JdbcUserDao">
