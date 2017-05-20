@@ -10,21 +10,7 @@
 
 	<!-- annotation 사용을 위해 설정  -->
 	<context:annotation-config />
-	<!-- MessageService 관련 -->
-	<bean id = "messageService" class = "sobt.domain.message.MessageServiceImpl">
-	</bean>
 
-	<!-- UserService 등록 -->
-	<bean id = "userService" class = "sobt.user.service.BasicUserService">
-		<property name = "userDao" ref = "userDao"/>
-		<property name = "userDataDao" ref = "userDataDao"/>
-	</bean>
-
-	<!-- UserDataDao 등록 -->
-	<bean id = "userDataDao" class = "sobt.dao.user.JdbcUserDataDao">
-		<property name = "dataSource" ref = "dataSource"/>
-		<property name = "sqlService" ref = "sqlService"/>
-	</bean>
 
   <!-- WeatherApiManager 등록 -->
   <bean id = "weatherApiManager" class = "sobt.api.manage.BasicWeatherApiManager">
@@ -32,7 +18,7 @@
   	<property name = "appkey" value ="1c33a135-5e89-34c1-baf9-ba0d453a29e8"/>
   </bean>
 
-  <!-- WeatherApiManager 등록 - httpService 설정 -->
+  <!-- httpService 등록 -->
   <bean id = "httpService" class = "sobt.http.service.ApacheHttpService"/>
 
 	<!-- userDao 등록 -->
@@ -63,7 +49,7 @@
 		<property name = "driverClass" value ="com.mysql.jdbc.Driver"/>
 		<property name = "url" value = "jdbc:mysql://localhost:3306/SOBT?useSSL=false"/>
 		<property name = "username" value = "root"/>
-		<property name = "password" value = "song9207108"/>
+		<property name = "password" value = "taek522!"/>
 	</bean>
 
 </beans>

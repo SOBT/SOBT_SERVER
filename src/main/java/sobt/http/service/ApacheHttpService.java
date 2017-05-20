@@ -1,53 +1,68 @@
 package sobt.http.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.message.BasicNameValuePair;
 
-public class ApacheHttpService implements HttpService{
-
-	@Override
-	public String getData(String url) {
-		return this.getData(url, null);
-	}
+public class ApacheHttpService implements HttpService {
 
 	@Override
-	public String getData(String url, HashMap<String, String> map) {
-		HttpClient mClient = new DefaultHttpClient();
-		try {
-			HttpGet get = new HttpGet(url);
-			ResponseHandler<String> rh = new BasicResponseHandler();
-			Set<Entry<String, String>>set = map.entrySet();
-			Iterator<Entry<String, String>>it = set.iterator();
-			
-			while(it.hasNext()){
-				Map.Entry<String, String> e = (Map.Entry<String, String>)it.next();
-				get.addHeader(e.getKey(), e.getValue());
+	public String DoHttpGet(String url, final String... head) {
+		return new ApacheHttpTemplate().ConnectHttpTemplate(url, new TypeStrategy() {
+
+			@Override
+			public HttpResponse DoSomethingWithType(HttpClient client, String url)
+					throws ClientProtocolException, IOException {
+				HttpGet request = new HttpGet(url);
+
+				for (int i = 0; i < head.length; i += 2) {
+					request.setHeader(head[i], head[i + 1]);
+				}
+
+				return client.execute(request);
+
 			}
-			return mClient.execute(get, rh);
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}finally{
-			mClient.getConnectionManager().shutdown();
-		}
-		
-		return "error";
+		});
 	}
-	
 
+	@Override
+	public String DoHttpPost(String url, final HashMap<String, String> entitys, final String... head) {
+		return new ApacheHttpTemplate().ConnectHttpTemplate(url, new TypeStrategy() {
+
+			@Override
+			public HttpResponse DoSomethingWithType(HttpClient client, String url)
+					throws ClientProtocolException, IOException {
+				HttpPost request = new HttpPost(url);
+
+				for (int i = 0; i < head.length; i += 2) {
+					request.setHeader(head[i], head[i + 1]);
+
+				}
+
+				List<NameValuePair> nameValuePairList = new ArrayList<NameValuePair>();
+				Iterator<String> keys = entitys.keySet().iterator();
+
+				while (keys.hasNext()) {
+					String key = keys.next();
+					nameValuePairList.add(new BasicNameValuePair(key, entitys.get(key)));
+				}
+
+				request.setEntity(new UrlEncodedFormEntity(nameValuePairList, "UTF-8"));
+
+				return client.execute(request);
+
+			}
+		});
+	}
 }
