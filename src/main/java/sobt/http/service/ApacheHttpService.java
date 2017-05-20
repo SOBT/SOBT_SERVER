@@ -18,10 +18,16 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.message.BasicNameValuePair;
 
 public class ApacheHttpService implements HttpService {
-
+	
+	private ApacheHttpTemplate appacheHttpTemplate;
+	
+	public void setApacheHttpTemplate(ApacheHttpTemplate appacheHttpTemplate ){
+		this.appacheHttpTemplate = appacheHttpTemplate;
+	}
+	
 	@Override
-	public String DoHttpGet(String url, final String... head){
-		return new ApacheHttpTemplate().ConnectHttpTemplate(url, new TypeStrategy() {
+	public String doHttpGet(String url, final String... head){
+		return this.appacheHttpTemplate.connectHttpTemplate(url, new TypeStrategy() {
 
 
 			@Override
@@ -36,8 +42,8 @@ public class ApacheHttpService implements HttpService {
 	}
 
 	@Override
-	public String DoHttpPost(String url, final HashMap<String, String> entitys, final String... head) {
-		return new ApacheHttpTemplate().ConnectHttpTemplate(url, new TypeStrategy() {
+	public String doHttpPost(String url, final HashMap<String, String> entitys, final String... head) {
+		return this.appacheHttpTemplate.connectHttpTemplate(url, new TypeStrategy() {
 
 			@Override
 			public HttpUriRequest DoSomethingWithType(String url){
@@ -66,5 +72,11 @@ public class ApacheHttpService implements HttpService {
 
 			}
 		});
+	}
+
+	@Override
+	public String doHttpRequest(String url, TypeStrategy strategy) {
+		// TODO Auto-generated method stub
+		return this.appacheHttpTemplate.connectHttpTemplate(url, strategy);
 	}
 }

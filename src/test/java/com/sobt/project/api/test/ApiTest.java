@@ -11,7 +11,6 @@ import sobt.api.manage.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="/test-applicationContext.xml")
-
 public class ApiTest {
 	
 	@Autowired

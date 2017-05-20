@@ -11,7 +11,7 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 public class ApacheHttpTemplate {
-	public String ConnectHttpTemplate(String url, TypeStrategy strategy){
+	public String connectHttpTemplate(String url, TypeStrategy strategy){
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpResponse response = null;
 		HttpUriRequest request = null;
