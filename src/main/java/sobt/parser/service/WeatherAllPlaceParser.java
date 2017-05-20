@@ -47,16 +47,16 @@ public class WeatherAllPlaceParser implements ParserService {
 		sentence = need.get(i).getCity() + " "
 				+ TranseEmoticon(need.get(i).getData().get(0).getWf()) +"→"
 				+ TranseEmoticon(need.get(i).getData().get(2).getWf()) +" "	
-				+ need.get(i).getData().get(0).getTmx()+"℃ → "
-				+ need.get(i++).getData().get(0).getTmn()+"℃\n";
+				+ need.get(i).getData().get(0).getTmn()+"℃ → "
+				+ need.get(i++).getData().get(0).getTmx()+"℃\n";
 		
 		while(i < nSize){
 			
 			sentence += need.get(i).getCity() + " "
 					+ TranseEmoticon(need.get(i).getData().get(0).getWf()) +"→"
 					+ TranseEmoticon(need.get(i).getData().get(2).getWf()) +" "	
-					+ need.get(i).getData().get(0).getTmx()+"℃ → "
-					+ need.get(i++).getData().get(0).getTmn()+"℃\n";
+					+ need.get(i).getData().get(0).getTmn()+"℃ → "
+					+ need.get(i++).getData().get(0).getTmx()+"℃\n";
 		
 		}
 		return sentence;

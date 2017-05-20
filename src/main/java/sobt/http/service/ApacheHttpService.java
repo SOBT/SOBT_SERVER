@@ -1,6 +1,7 @@
 package sobt.http.service;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,25 +14,23 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.message.BasicNameValuePair;
 
 public class ApacheHttpService implements HttpService {
 
 	@Override
-	public String DoHttpGet(String url, final String... head) {
+	public String DoHttpGet(String url, final String... head){
 		return new ApacheHttpTemplate().ConnectHttpTemplate(url, new TypeStrategy() {
 
-			@Override
-			public HttpResponse DoSomethingWithType(HttpClient client, String url)
-					throws ClientProtocolException, IOException {
-				HttpGet request = new HttpGet(url);
 
+			@Override
+			public HttpUriRequest DoSomethingWithType(String url){
+				HttpGet request = new HttpGet(url);
 				for (int i = 0; i < head.length; i += 2) {
 					request.setHeader(head[i], head[i + 1]);
 				}
-
-				return client.execute(request);
-
+				return request;
 			}
 		});
 	}
@@ -41,8 +40,7 @@ public class ApacheHttpService implements HttpService {
 		return new ApacheHttpTemplate().ConnectHttpTemplate(url, new TypeStrategy() {
 
 			@Override
-			public HttpResponse DoSomethingWithType(HttpClient client, String url)
-					throws ClientProtocolException, IOException {
+			public HttpUriRequest DoSomethingWithType(String url){
 				HttpPost request = new HttpPost(url);
 
 				for (int i = 0; i < head.length; i += 2) {
@@ -58,9 +56,13 @@ public class ApacheHttpService implements HttpService {
 					nameValuePairList.add(new BasicNameValuePair(key, entitys.get(key)));
 				}
 
-				request.setEntity(new UrlEncodedFormEntity(nameValuePairList, "UTF-8"));
+				try {
+					request.setEntity(new UrlEncodedFormEntity(nameValuePairList, "UTF-8"));
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
 
-				return client.execute(request);
+				return request;
 
 			}
 		});
