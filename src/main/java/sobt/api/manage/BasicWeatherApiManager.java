@@ -31,7 +31,7 @@ public class BasicWeatherApiManager implements WeatherApiManager{
 		String url = String.format(SOBTConstant.WEATHER_API_URL_MIN, city, county, village);
 		parserService = new WeatherLocationParser();
 		
-		return parserService.Parse(httpService.DoHttpGet(url, "AppKey", appKey));
+		return parserService.Parse(httpService.doHttpGet(url, "AppKey", appKey));
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class BasicWeatherApiManager implements WeatherApiManager{
 		String url = SOBTConstant.WEATHER_API_URL_ALL;
 		parserService = new WeatherAllPlaceParser();
 		
-		return parserService.Parse(httpService.DoHttpGet(url));
+		return parserService.Parse(httpService.doHttpGet(url));
 	}
 
 }

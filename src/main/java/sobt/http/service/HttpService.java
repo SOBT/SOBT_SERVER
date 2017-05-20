@@ -1,13 +1,14 @@
 package sobt.http.service;
 
-import java.util.List;
+import java.io.IOException;
+import java.util.HashMap;
 
-import org.apache.http.NameValuePair;
 
 public interface HttpService {
 	
 	
-	public String DoHttpPost(String url,final List<NameValuePair> urlParameters, final String ...head);
-	public String DoHttpGet(String url, final String ...head);
+	public String doHttpPost(String url, final HashMap<String, String> entitys, final String ...head);
+	public String doHttpGet(String url, final String ...head);
+	public String doHttpRequest(String url , TypeStrategy strategy);
 	
 }
