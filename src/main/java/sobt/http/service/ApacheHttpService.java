@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -42,15 +43,42 @@ public class ApacheHttpService implements HttpService {
 	}
 
 	@Override
-	public String doHttpPost(String url, final HashMap<String, String> entitys, final String... head) {
+	public String doHttpPostByUrlencoded(String url, Map<String, String> param) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String doHttpPostByUrlencoded(String url, Map<String, String> Header, Map<String, String> param) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String doHttpPostByJson(String url, Map<String, String> param) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String doHttpPostByJson(String url, Map<String, String> Header, Map<String, String> param) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*
+	@Override
+	public String doHttpPost(String url, final Map<String, String> entitys, final String... head) {
 		return this.appacheHttpTemplate.connectHttpTemplate(url, new TypeStrategy() {
 
 			@Override
 			public HttpUriRequest DoSomethingWithType(String url){
+
 				HttpPost request = new HttpPost(url);
 
 				for (int i = 0; i < head.length; i += 2) {
-					request.setHeader(head[i], head[i + 1]);
+					System.out.println(head[i] + "  " + head[i+1]);
+					request.addHeader(head[i], head[i + 1]);
 
 				}
 
@@ -73,10 +101,5 @@ public class ApacheHttpService implements HttpService {
 			}
 		});
 	}
-
-	@Override
-	public String doHttpRequest(String url, TypeStrategy strategy) {
-		// TODO Auto-generated method stub
-		return this.appacheHttpTemplate.connectHttpTemplate(url, strategy);
-	}
+	*/
 }

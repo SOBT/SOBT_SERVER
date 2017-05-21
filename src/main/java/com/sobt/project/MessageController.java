@@ -1,6 +1,9 @@
 package com.sobt.project;
 
 import org.springframework.stereotype.Controller;
+
+import java.net.URLDecoder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,8 +31,9 @@ public class MessageController {
 
 	@RequestMapping(value = "/message", method = RequestMethod.POST, headers = "Accept=application/json; charset=utf-8")
 	public @ResponseBody MessageVo message(@RequestBody User user) throws Exception {
-//		userService.addUser(user.getUser_key(), user.getContent(), user.getType());
+		userService.addUser(user.getUser_key(), user.getContent(), user.getType());
 		String text = user.getContent();
+		text = URLDecoder.decode(text, "UTF-8");
 		
 		MessageVo msgVo = new MessageVo();
 		Message message = msgService.makeMessage("해당 기능은 아직 준비 중입니다!");
