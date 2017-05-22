@@ -29,19 +29,19 @@ public class PapagoServiceTest {
 	
 	@Autowired
 	TranslateService translateService;
-//	@Test
-//	public void doHttpGetTest(){
-//		System.out.println(urlHttpService.doHttpGet("http://localhost:8080/project/keyboard"));
-//	}
-//	
-//	@Test
-//	public void doHttpPostByJsonTest(){
-//		Map<String, String> param = new HashMap<String,String>();
-//		param.put("user_key", "encryptedUserKey");
-//		param.put("type", "text");
-//		param.put("content", "날씨 정보");
-//		System.out.println(urlHttpService.doHttpPostByJson("http://localhost:8080/project/message",param));
-//	}
+	@Test
+	public void doHttpGetTest(){
+		System.out.println(urlHttpService.doHttpGet("http://localhost:8080/project/keyboard"));
+	}
+	
+	@Test
+	public void doHttpPostByJsonTest(){
+		Map<String, String> param = new HashMap<String,String>();
+		param.put("user_key", "encryptedUserKey");
+		param.put("type", "text");
+		param.put("content", "날씨 정보");
+		System.out.println(urlHttpService.doHttpPostByJson("http://localhost:8080/project/message",param));
+	}
 	
 	@Test
 	public void translateTest(){
