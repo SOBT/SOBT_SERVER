@@ -57,16 +57,20 @@ public String translateSentence(Translate translate, String sentence){
 }</code></pre>
 
 ## PapagoService 사용법
+<pre><code>
 //객체생
 @Autowired
 TranslateService translateService;
+
 //원하는 번역 방식을 Translate enum객체로 전달, 번역할 문장 전달.
 public String translateSentence(Translate translate, String sentence)
+
 //Translate enum 객체 종류
 EN_TO_KO("en","ko"), KO_TO_EN("ko","en"), KO_TO_JA("ko","ja"), KO_TO_CN("ko","zh-CN")
 ,JA_TO_KO("ja","ko"),CN_TO_KO("zh-CN","ko");
+
 //예시
 public void translateTest(){
 		System.out.println(translateService.translateSentence(Translate.KO_TO_CN, "만나서 반갑습니다."));
-}
+}</code></pre>
  
