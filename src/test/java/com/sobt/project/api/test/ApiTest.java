@@ -1,6 +1,8 @@
 package com.sobt.project.api.test;
 import static org.junit.Assert.*;
 
+import java.io.UnsupportedEncodingException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import sobt.api.manage.*;
+import sobt.http.service.HttpService;
+import sobt.translate.service.PapagoService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="/test-applicationContext.xml")
@@ -15,6 +19,8 @@ public class ApiTest {
 	
 	@Autowired
 	private WeatherApiManager weatehrApiManager;
+	@Autowired
+	HttpService httpService;
 	@Test
 	public void ApiTest(){
 //		ApiUmarshal<WeatherAllPlaceData> api = new ApiUmarshal<WeatherAllPlaceData>();
