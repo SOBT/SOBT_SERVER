@@ -18,20 +18,19 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.message.BasicNameValuePair;
 
 public class ApacheHttpService implements HttpService {
-	
+
 	private ApacheHttpTemplate appacheHttpTemplate;
-	
-	public void setApacheHttpTemplate(ApacheHttpTemplate appacheHttpTemplate ){
+
+	public void setApacheHttpTemplate(ApacheHttpTemplate appacheHttpTemplate) {
 		this.appacheHttpTemplate = appacheHttpTemplate;
 	}
-	
+
 	@Override
-	public String doHttpGet(String url, final String... head){
+	public String doHttpGet(String url, final String... head) {
 		return this.appacheHttpTemplate.connectHttpTemplate(url, new TypeStrategy() {
 
-
 			@Override
-			public HttpUriRequest DoSomethingWithType(String url){
+			public HttpUriRequest DoSomethingWithType(String url) {
 				HttpGet request = new HttpGet(url);
 				for (int i = 0; i < head.length; i += 2) {
 					request.setHeader(head[i], head[i + 1]);
@@ -46,7 +45,7 @@ public class ApacheHttpService implements HttpService {
 		return this.appacheHttpTemplate.connectHttpTemplate(url, new TypeStrategy() {
 
 			@Override
-			public HttpUriRequest DoSomethingWithType(String url){
+			public HttpUriRequest DoSomethingWithType(String url) {
 				HttpPost request = new HttpPost(url);
 
 				for (int i = 0; i < head.length; i += 2) {
