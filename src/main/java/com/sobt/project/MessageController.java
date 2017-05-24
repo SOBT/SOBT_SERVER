@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sobt.domain.User;
 
+import sobt.api.manage.SubwayAPIManager;
 import sobt.api.manage.WeatherApiManager;
 import sobt.domain.message.Keyboard;
 import sobt.domain.message.Message;
@@ -28,6 +29,8 @@ public class MessageController {
 	private WeatherApiManager weatehrApiManager;
 	@Autowired 
 	private UserService userService;
+	@Autowired
+	private SubwayAPIManager subwayApimanager;
 
 	@RequestMapping(value = "/message", method = RequestMethod.POST, headers = "Accept=application/json; charset=utf-8")
 	public @ResponseBody MessageVo message(@RequestBody User user) throws Exception {
@@ -42,9 +45,15 @@ public class MessageController {
 			// 사용자로부터 버튼 방식으로 응답 받는 예시
 			Keyboard keyboard = msgService.makeKeyboard("날씨 정보","지하철 정보","영화 정보");
 			msgVo.setKeyboard(keyboard);
-		}else if( text.equals("홈페이지")){
+		} else if(text.equals("지하철 정보")) {
+			message = msgService.makeMessage(subwayApimanager.getRealTimeArrival("json", "노원"));
+			// 사용자로부터 버튼 방식으로 응답 받는 예시
+			Keyboard keyboard = msgService.makeKeyboard("날씨 정보","지하철 정보","영화 정보");
+			msgVo.setKeyboard(keyboard);
+			
+		} else if( text.equals("홈페이지")){
 			message = msgService.makeMessage("SOBT 깃허브 홈페이지","바로가기","https://github.com/SOBT/SOBT_SERVER");
-		}else{}
+		} else{}
 		
 		msgVo.setMessage(message);
 		
