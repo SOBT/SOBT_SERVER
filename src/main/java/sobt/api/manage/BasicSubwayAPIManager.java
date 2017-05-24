@@ -21,19 +21,17 @@ public class BasicSubwayAPIManager implements SubwayAPIManager{
 	@Override
 	public String getRealTimeArrival(String type, String statnNm) {
 		//예외처리 IOException + Runtime
-		String url = String.format(SOBTConstant.REALTIME_SUBWAY_API_URL, SOBTConstant.REALTIME_PRODUCT_KEY, "json" , statnNm);
+		String url = String.format(SOBTConstant.REALTIME_SUBWAY_API_URL, SOBTConstant.REALTIME_PRODUCT_KEY, type , statnNm);
 		parserService = new RealTimeStationArrivalParser();
-		//Product_key, type, service, LINE_NUM, WEEK_TAG, INOUT_TAG, FR_CODE
 		return parserService.Parse(httpService.doHttpGet(url));
 	}
 	
 	@Override
 	public String getFirstAndLast(String type, int LINE_NUM, int WEEK_TAG, int INOUT_TAG, String FR_CODE) {
 		//예외처리 IOException + Runtime
-		String url = String.format(SOBTConstant.FIRST_AND_LAST_SUBWAY_API_URL, SOBTConstant.FIRST_AND_LAST_PRODUCT_KEY, "json" , LINE_NUM, WEEK_TAG, INOUT_TAG, FR_CODE);
+		String url = String.format(SOBTConstant.FIRST_AND_LAST_SUBWAY_API_URL, SOBTConstant.FIRST_AND_LAST_PRODUCT_KEY, type , LINE_NUM, WEEK_TAG, INOUT_TAG, FR_CODE);
 		parserService = new SearchFirstAndLastFRCodeParser();
 		return parserService.Parse(httpService.doHttpGet(url));
-		//Product_key, type, statnNm
 		
 	}
 

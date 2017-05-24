@@ -22,7 +22,6 @@ public class RealTimeStationArrivalParser implements ParserService{
 				result += info.get(i).getSubwayId() + " " + info.get(i).getBstatnNm() + "행 " + info.get(i).getArvlCd() +"("+info.get(i).getArvlMsg3() + ")\n";
 			}
 			
-			System.out.println(result);
 			return result;
 		}		
 		return response.getErrorMessage().getMessage();
