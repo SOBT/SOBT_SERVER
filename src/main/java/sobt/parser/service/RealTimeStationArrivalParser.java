@@ -2,26 +2,27 @@ package sobt.parser.service;
 
 import com.google.gson.Gson;
 import sobt.domain.subway.*;
-// RealTimeStationArrivalResponse, RealTimeStationArrivalInfo
+import java.util.List;
 
 public class RealTimeStationArrivalParser implements ParserService{
 	
 	@Override
 	public String Parse(String json) {
+		//RealTimeStationArrivalResponse response = (new UnmarshallJsonTemplate<RealTimeStationArrivalResponse>()).ReturnObjectTemplate(json, new RealTimeStationArrivalResponse());
 		Gson gson = new Gson();
 		RealTimeStationArrivalResponse response = gson.fromJson(json, RealTimeStationArrivalResponse.class);
-		int count=response.getRealtimeArrivalList().size();
-		RealTimeStationArrivalInfo info;
+		List <RealTimeStationArrivalInfo> info=response.getRealtimeArrivalList();
 		
 		if(response.getErrorMessage().getCode().equals("INFO-000")) {
-			System.out.println(json);
-			for(int i=0;i<count;i++)
+			String result;
+			result = info.get(0).getStatnNm()+"역\n";
+			
+			for(int i=0;i<info.size();i++)
 			{
-				info = response.getRealtimeArrivalList().get(i);
-				System.out.println(info.getBarvlDt());
-				// 필요한 정보 string형태로 변환후 return
+				result += info.get(i).getSubwayId() + " " + info.get(i).getBstatnNm() + "행 " + info.get(i).getArvlCd() +"("+info.get(i).getArvlMsg3() + ")\n";
 			}
-			return json;
+			
+			return result;
 		}		
 		return response.getErrorMessage().getMessage();
 	}
