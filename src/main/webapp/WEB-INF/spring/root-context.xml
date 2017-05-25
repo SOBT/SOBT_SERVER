@@ -10,6 +10,9 @@
 
 	<!-- annotation 사용을 위해 설정 -->
 	<context:annotation-config />
+	<bean id="subwayAPIManager" class="sobt.api.manage.BasicSubwayAPIManager">
+		<property name="httpService" ref="urlHttpService"/>
+	</bean>
 	<bean id="papagoService" class="sobt.python.service.PapagoServiceImpl"/>
 	<bean id="messageService" class="sobt.domain.message.MessageServiceImpl" />
 	<!-- TranslateService 등록 -->

@@ -11,4 +11,9 @@ public class SOBTConstant {
 	final public static String PAPAGO_API_URL = "https://openapi.naver.com/v1/language/translate";
 	final public static String PAPAGO_CLIENT_ID = "ZNWdhtejGiPYnWK55IfZ";
 	final public static String PAPAGO_CLIENT_SECRET = "ajrA9jH8iO";
+	final public static String FIRST_AND_LAST_SUBWAY_API_URL = "http://openAPI.seoul.go.kr:8088/%s/%s/SearchFirstAndLastTrainbyFRCodeService/1/5/%d/%d/%d/%s/";
+	final public static String FIRST_AND_LAST_PRODUCT_KEY = "41455749506c687735304f43775551";
+	final public static String REALTIME_SUBWAY_API_URL = "http://swopenAPI.seoul.go.kr/api/subway/%s/%s/realtimeStationArrival/0/5/%s";
+	final public static String REALTIME_PRODUCT_KEY = "51646375416c687735364d41484350";
+
 }
