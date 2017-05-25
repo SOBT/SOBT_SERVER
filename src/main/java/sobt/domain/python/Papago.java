@@ -25,6 +25,7 @@ public class Papago {
 		try{			
 			sent = URLEncoder.encode(sent, "UTF-8");
 			interpreter.exec("res = papago('"+sent+"',"+opt+")");
+//			interpreter.exec("res = 'Çê¼Ò¸®'");
 			PyString x = (PyString)interpreter.eval("res");
 			return x.toString();
 			
