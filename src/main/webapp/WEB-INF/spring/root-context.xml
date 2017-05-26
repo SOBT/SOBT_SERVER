@@ -39,7 +39,10 @@
   	<property name = "httpService" ref= "urlHttpService"/>
   	<property name = "appkey" value ="1c33a135-5e89-34c1-baf9-ba0d453a29e8"/>
   </bean>
-
+  <!-- SubwayAPIManager 등록 -->
+  <bean id = "subwayAPIManager" class = "sobt.api.manage.BasicSubwayAPIManager">
+      <property name = "httpService" ref= "urlHttpService"/>
+  </bean>
   <!-- httpService 등록 -->
   <bean id = "httpService" class = "sobt.http.service.ApacheHttpService">
   	<property name = "apacheHttpTemplate" ref = "apacheHttpTemplate"/>

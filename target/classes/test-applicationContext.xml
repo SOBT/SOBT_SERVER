@@ -40,7 +40,7 @@
   	<property name = "appkey" value ="1c33a135-5e89-34c1-baf9-ba0d453a29e8"/>
   </bean>
   <!-- SubwayAPIManager 등록 -->
-  <bean id = "subwayApiManager" class = "sobt.api.manage.BasicSubwayAPIManager">
+  <bean id = "subwayAPIManager" class = "sobt.api.manage.BasicSubwayAPIManager">
       <property name = "httpService" ref= "urlHttpService"/>
   </bean>
   <!-- httpService 등록 -->
@@ -76,7 +76,7 @@
 		<property name = "driverClass" value ="com.mysql.jdbc.Driver"/>
 		<property name = "url" value = "jdbc:mysql://localhost:3306/SOBT?useSSL=false"/>
 		<property name = "username" value = "root"/>
-		<property name = "password" value = "song9207108"/>
+		<property name = "password" value = "5887"/>
 	</bean>
 
 </beans>
