@@ -8,8 +8,13 @@
   	http://www.springframework.org/schema/context/spring-context.xsd">
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
-	<!-- annotation 사용을 위해 설정  -->
+	<!-- annotation 사용을 위해 설정 -->
 	<context:annotation-config />
+	<bean id="subwayAPIManager" class="sobt.api.manage.BasicSubwayAPIManager">
+		<property name="httpService" ref="urlHttpService"/>
+	</bean>
+	<bean id="papagoService" class="sobt.python.service.PapagoServiceImpl"/>
+	<bean id="messageService" class="sobt.domain.message.MessageServiceImpl" />
 	<!-- TranslateService 등록 -->
 	<bean id = "translateService" class = "sobt.translate.service.PapagoService">
 		<property name ="httpService" ref = "urlHttpService"/>
@@ -30,9 +35,8 @@
 		<property name = "userDao" ref = "userDao"/>
 		<property name = "userDataDao" ref = "userDataDao"/>
 	</bean>
-	<!-- MessageService -->
-	<bean id = "MessageService" class = "sobt.domain.message.MessageServiceImpl"/>
 	<!-- ApacheHttpTemplate 등록 -->
+<<<<<<< HEAD
 	<bean id = "apacheHttpTemplate" class = "sobt.http.service.ApacheHttpTemplate"/>
   <!-- WeatherApiManager 등록 -->
   <bean id = "weatherApiManager" class = "sobt.api.manage.BasicWeatherApiManager">
@@ -47,28 +51,41 @@
   <bean id = "httpService" class = "sobt.http.service.ApacheHttpService">
   	<property name = "apacheHttpTemplate" ref = "apacheHttpTemplate"/>
   </bean>
+=======
+	<bean id="apacheHttpTemplate" class="sobt.http.service.ApacheHttpTemplate" />
+	<!-- WeatherApiManager 등록 -->
+	<bean id="weatherApiManager" class="sobt.api.manage.BasicWeatherApiManager">
+		<property name="httpService" ref="httpService" />
+		<property name="appkey" value="1c33a135-5e89-34c1-baf9-ba0d453a29e8" />
+	</bean>
+
+	<!-- httpService 등록 -->
+	<bean id="httpService" class="sobt.http.service.ApacheHttpService">
+		<property name="apacheHttpTemplate" ref="apacheHttpTemplate" />
+	</bean>
+>>>>>>> ba63edced85e3308b9a0e06cf37eb1b8fafa0cae
 
 	<!-- userDao 등록 -->
-	<bean id = "userDao" class = "sobt.dao.user.JdbcUserDao">
-		<property name = "dataSource" ref="dataSource"/>
-		<property name = "sqlService" ref="sqlService"/>
+	<bean id="userDao" class="sobt.dao.user.JdbcUserDao">
+		<property name="dataSource" ref="dataSource" />
+		<property name="sqlService" ref="sqlService" />
 	</bean>
-	<!-- unmarshaller 등록  -->
+	<!-- unmarshaller 등록 -->
 	<bean id="unmarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
 		<property name="contextPath" value="sobt.sql.service.jaxb" />
 	</bean>
 
 	<!-- SqlReader 등록 -->
-	<bean id = "sqlReader" class = "sobt.sql.service.OxmSqlReader">
-		<property name = "unmarshaller" ref = "unmarshaller"/>
+	<bean id="sqlReader" class="sobt.sql.service.OxmSqlReader">
+		<property name="unmarshaller" ref="unmarshaller" />
 	</bean>
 	<!-- SqlRegistry 등록 -->
-	<bean id = "sqlRegistry" class = "sobt.sql.service.HashMapSqlRegistry"/>
+	<bean id="sqlRegistry" class="sobt.sql.service.HashMapSqlRegistry" />
 
 	<!-- SqlService 등록 -->
-	<bean id = "sqlService" class = "sobt.sql.service.BasicSqlService">
-		<property name = "sqlReader" ref = "sqlReader"/>
-		<property name = "sqlRegistry" ref ="sqlRegistry"/>
+	<bean id="sqlService" class="sobt.sql.service.BasicSqlService">
+		<property name="sqlReader" ref="sqlReader" />
+		<property name="sqlRegistry" ref="sqlRegistry" />
 	</bean>
 
   <!-- DB Connection  -->

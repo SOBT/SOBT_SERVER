@@ -15,7 +15,7 @@
 	</properties>
 	<dependencies>
 		<!-- Spring -->
-		<dependency> 
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${org.springframework-version}</version>
@@ -209,9 +209,31 @@
 			<version>1.1.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.python</groupId>
+			<artifactId>jython-standalone</artifactId>
+			<version>2.7.1b2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-resources-plugin</artifactId>
+			<version>2.4.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/net.sf.mavenjython/jython-compile-maven-plugin -->
+		<dependency>
+			<groupId>net.sf.mavenjython</groupId>
+			<artifactId>jython-compile-maven-plugin</artifactId>
+			<version>1.2</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>net.sf.mavenjython.test</groupId>
+				<artifactId>python-test-maven-plugin-external</artifactId>
+				<version>1.0</version>
+			</plugin>
 			<plugin>
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<version>2.9</version>
