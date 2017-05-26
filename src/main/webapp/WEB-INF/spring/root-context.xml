@@ -10,9 +10,7 @@
 
 	<!-- annotation 사용을 위해 설정 -->
 	<context:annotation-config />
-	<bean id="subwayAPIManager" class="sobt.api.manage.BasicSubwayAPIManager">
-		<property name="httpService" ref="urlHttpService"/>
-	</bean>
+    
 	<bean id="papagoService" class="sobt.python.service.PapagoServiceImpl"/>
 	<bean id="messageService" class="sobt.domain.message.MessageServiceImpl" />
 	<!-- TranslateService 등록 -->
@@ -36,7 +34,6 @@
 		<property name = "userDataDao" ref = "userDataDao"/>
 	</bean>
 	<!-- ApacheHttpTemplate 등록 -->
-<<<<<<< HEAD
 	<bean id = "apacheHttpTemplate" class = "sobt.http.service.ApacheHttpTemplate"/>
   <!-- WeatherApiManager 등록 -->
   <bean id = "weatherApiManager" class = "sobt.api.manage.BasicWeatherApiManager">
@@ -51,20 +48,6 @@
   <bean id = "httpService" class = "sobt.http.service.ApacheHttpService">
   	<property name = "apacheHttpTemplate" ref = "apacheHttpTemplate"/>
   </bean>
-=======
-	<bean id="apacheHttpTemplate" class="sobt.http.service.ApacheHttpTemplate" />
-	<!-- WeatherApiManager 등록 -->
-	<bean id="weatherApiManager" class="sobt.api.manage.BasicWeatherApiManager">
-		<property name="httpService" ref="httpService" />
-		<property name="appkey" value="1c33a135-5e89-34c1-baf9-ba0d453a29e8" />
-	</bean>
-
-	<!-- httpService 등록 -->
-	<bean id="httpService" class="sobt.http.service.ApacheHttpService">
-		<property name="apacheHttpTemplate" ref="apacheHttpTemplate" />
-	</bean>
->>>>>>> ba63edced85e3308b9a0e06cf37eb1b8fafa0cae
-
 	<!-- userDao 등록 -->
 	<bean id="userDao" class="sobt.dao.user.JdbcUserDao">
 		<property name="dataSource" ref="dataSource" />
