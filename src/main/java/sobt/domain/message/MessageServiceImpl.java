@@ -1,7 +1,7 @@
 package sobt.domain.message;
 
 public class MessageServiceImpl implements MessageService {
-
+	
 	@Override
 	public Message makeMessage(String text, String photo_url, int width, int height, String msg_label, String msg_url) {
 		// TODO Auto-generated method stub

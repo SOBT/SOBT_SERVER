@@ -2,6 +2,8 @@ package sobt.parser.service;
 
 import com.google.gson.Gson;
 
+//import sobt.domain.subway.SearchFirstAndLastResponse;
+//import sobt.domain.subway.RealTimeStationArrivalResponse;
 import sobt.domain.weather.WeatherResponse;
 
 public class UnmarshallJsonTemplate<T> {
