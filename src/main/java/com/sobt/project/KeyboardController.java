@@ -18,7 +18,6 @@ import sobt.domain.message.MessageServiceImpl;
 public class KeyboardController {
 	@Autowired
 	MessageService msg_service;
-	
 	@RequestMapping(value = "/keyboard", method = RequestMethod.GET, headers = "Accept=application/json; charset=utf-8")
 	public @ResponseBody Keyboard keyboard() throws Exception { 
 		Keyboard keyboard = msg_service.makeKeyboard("날씨 정보", "지하철 정보", "영화 정보");
