@@ -50,7 +50,7 @@ public class MessageController {
 		} else if( text.equals("지하철 정보")) {
 			message = msgService.makeMessage(subwayApimanager.getRealTimeArrival("json", "노원"));
 			// 사용자로부터 버튼 방식으로 응답 받는 예시
-			Keyboard keyboard = msgService.makeKeyboard("날씨 정보","지하철 정보","영화 정보");
+			Keyboard keyboard = msgService.makeKeyboard("날씨 정보","지하철 정보","번역");
 			msgVo.setKeyboard(keyboard);
 			
 		} else{
