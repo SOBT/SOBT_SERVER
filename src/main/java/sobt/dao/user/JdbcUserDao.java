@@ -7,10 +7,13 @@ import javax.sql.DataSource;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
+import sobt.domain.user.Status;
+import sobt.domain.user.SubStatus;
 import sobt.domain.user.User;
 import sobt.sql.service.SqlService;
 
@@ -25,6 +28,8 @@ public class JdbcUserDao implements UserDao {
 			// TODO Auto-generated method stub
 			User user = new User();
 			user.setUserId(rs.getString("user_id"));
+			user.setStatus(Status.valueOf(rs.getInt("status")));
+			user.setSubStatus(SubStatus.valueOf(rs.getInt("sub_status")));
 			return user;
 		}};
 	
@@ -51,7 +56,13 @@ public class JdbcUserDao implements UserDao {
 	@Override
 	public User getUser(String userId) {
 		// TODO Auto-generated method stub
-		return this.jdbcTemplate.queryForObject(this.sqlService.getSql("getUser"),new Object[]{userId},this.userMapper);
+		try{
+			return this.jdbcTemplate.queryForObject(this.sqlService.getSql("getUser"),new Object[]{userId},this.userMapper);
+		}catch(EmptyResultDataAccessException e){
+			//데이터가 없을경우 처
+			return null; 
+		}
+		
 	}
 
 	@Override

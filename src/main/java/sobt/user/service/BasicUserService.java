@@ -28,5 +28,17 @@ public class BasicUserService implements UserService{
 		userDataDao.addUserData(userData);
 		
 	}
+	@Override
+	public User getUser(String id) {
+		// TODO Auto-generated method stub
+		return userDao.getUser(id);
+	}
+	@Override
+	public void addUser(User user, UserData userData) {
+		// TODO Auto-generated method stub
+		userDao.addUser(user);
+		userDataDao.addUserData(userData);
+		
+	}
 
 }

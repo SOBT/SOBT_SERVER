@@ -2,7 +2,21 @@ package sobt.domain.user;
 
 public class User {
 	private String userId;
+	private Status status;
+	private SubStatus subStatus;
 	
+	public Status getStatus() {
+		return status;
+	}
+	public SubStatus getSubStatus() {
+		return subStatus;
+	}
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+	public void setSubStatus(SubStatus subStatus) {
+		this.subStatus = subStatus;
+	}
 	public User(){
 		
 	}
