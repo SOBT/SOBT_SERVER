@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import sobt.domain.message.MessageVo;
-import com.sobt.domain.User;
+import com.sobt.domain.KakaoUser;
 
 /**
  * Handles requests for the application home page.
@@ -48,7 +48,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/friend", method = RequestMethod.POST, headers = "Accept=application/json; charset=utf-8")
-	public @ResponseBody MessageVo add_friend(@RequestBody User user) throws Exception {
+	public @ResponseBody MessageVo add_friend(@RequestBody KakaoUser user) throws Exception {
 		String text = user.getUser_key();
 //		messageVo.setText(text+"님 친구로 추가해주셔서 감사합니다!");
 //		messageVo.setKeyboard_buttons("날씨 정보", "지하철 정보", "영화 정보");

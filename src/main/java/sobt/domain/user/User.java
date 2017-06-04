@@ -30,5 +30,10 @@ public class User {
 	public String getUserId() {
 		return userId;
 	}
+	
+	public void setDefaultStatus(){
+		this.status = Status.NORMAL;
+		this.subStatus = SubStatus.NORMAL;
+	}
 
 }

@@ -46,7 +46,8 @@ public class JdbcUserDao implements UserDao {
 	public void addUser(User user) {
 		// TODO Auto-generated method stub
 		try{
-			this.jdbcTemplate.update(this.sqlService.getSql("addUser"),user.getUserId());
+			this.jdbcTemplate.update(this.sqlService.getSql("addUser"),user.getUserId(),user.getStatus().intValue()
+					,user.getSubStatus().initValue());
 		}catch(DuplicateKeyException e){
 			//log 처리 
 		}
@@ -59,9 +60,17 @@ public class JdbcUserDao implements UserDao {
 		try{
 			return this.jdbcTemplate.queryForObject(this.sqlService.getSql("getUser"),new Object[]{userId},this.userMapper);
 		}catch(EmptyResultDataAccessException e){
-			//데이터가 없을경우 처
+			//데이터가 없을경우 처리 
+			System.out.println("테스트");
 			return null; 
 		}
+		
+	}
+	@Override
+	public void updateUser(User user) {
+		// TODO Auto-generated method stub
+		this.jdbcTemplate.update(this.sqlService.getSql("updateUser"),user.getStatus().intValue(),user.getSubStatus().initValue()
+				, user.getUserId());
 		
 	}
 
@@ -84,5 +93,7 @@ public class JdbcUserDao implements UserDao {
 		this.jdbcTemplate.update(this.sqlService.getSql("deleteAll"));
 		
 	}
+
+	
 
 }

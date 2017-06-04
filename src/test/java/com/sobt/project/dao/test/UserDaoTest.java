@@ -31,6 +31,9 @@ public class UserDaoTest {
 		user1 = new User("testUser1");
 		user2 = new User("testUser2");
 		user3 = new User("testUser3");
+		user1.setDefaultStatus();
+		user2.setDefaultStatus();
+		user3.setDefaultStatus();
 	}
 	
 	@Test
@@ -88,6 +91,12 @@ public class UserDaoTest {
 	public void addUserDuple(){
 		userDao.addUser(user1);
 		userDao.addUser(user1);
+	}
+	
+	@Test
+	public void getUserNotResut(){
+		User user = userDao.getUser("1");
+		assertThat(user, nullValue());
 	}
 
 }

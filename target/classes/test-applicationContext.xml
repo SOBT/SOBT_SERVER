@@ -12,8 +12,9 @@
 	<context:annotation-config />
 	<!-- ChatTemplate 등록 -->
 	<bean id = "chatTemplate" class = "sobt.chat.template.ChatTemplate">
-		<property name = "userService" ref = "userService">
+		<property name = "userService" ref = "userService"/>
 		<property name = "messageService" ref = "messageService"/>
+		<property name = "weatherApiManager" ref = "weatherApiManager"/>
 	</bean>
 	<!-- TranslateService 등록 -->
 	<bean id = "translateService" class = "sobt.translate.service.PapagoService">
