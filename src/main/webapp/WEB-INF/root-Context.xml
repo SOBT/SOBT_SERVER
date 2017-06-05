@@ -53,7 +53,7 @@
     <!-- SubwayAPIManager 등록 -->
     <bean id = "subwayAPIManager" class = "sobt.api.manage.BasicSubwayAPIManager">
         <property name = "stationDataDao" ref = "stationDataDao"/>
-        <property name = "httpService" ref= "urlHttpService"/>
+        <property name = "httpService" ref = "urlHttpService"/>
     </bean>
     <!-- httpService 등록 -->
     <bean id = "httpService" class = "sobt.http.service.ApacheHttpService">
