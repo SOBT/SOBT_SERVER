@@ -74,6 +74,42 @@ public void translateTest(){
 		System.out.println(translateService.translateSentence(Translate.KO_TO_CN, "만나서 반갑습니다."));
 }</code></pre>
 
+## SubWayService 사용법
+<pre><code>
+//객체생성
+@Autowired
+BasicSubwayAPIMananger basicSubwayAPIManager;
+
+//원하는 텍스트 타입(json), 지하철역 전달 - 실시간 지하철 정보
+public String getRealTimeArrival(String type, String statnNm)
+
+//원하는 텍스트 타입(json), 호선, 현재시간(서버시간), 상하행선, 지하철역 전달 - 첫차/막차 정보
+public String getFirstAndLast(String type, String LINE_NUM, int WEEK_TAG, int INOUT_TAG, String stationName)
+
+//받아온 정보들 parsing
+public String Parse(String json)
+
+//예시 - 실시간 지하철 정보
+public String Parse(String json) {
+    Gson gson = new Gson();
+    RealTimeStationArrivalResponse response = gson.fromJson(json, RealTimeStationArrivalResponse.class);
+    List <RealTimeStationArrivalInfo> info=response.getRealtimeArrivalList();
+
+    if(response.getErrorMessage().getCode().equals("INFO-000")) {
+        String result;
+        result = info.get(0).getStatnNm()+"역\n";
+
+        for(int i=0;i<info.size();i++)
+        {
+            result += info.get(i).getSubwayId() + " " + info.get(i).getBstatnNm() + "행 " + info.get(i).getArvlCd() +"("+info.get(i).getArvlMsg3() + ")\n";
+        }
+
+        return result;
+    }		
+    return response.getErrorMessage().getMessage();
+}</code></pre>
+
+
 ## DB연동 방법.
 <pre><code>
 //연결 정보 설정.

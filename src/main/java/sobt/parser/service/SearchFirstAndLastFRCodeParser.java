@@ -14,7 +14,6 @@ public class SearchFirstAndLastFRCodeParser implements ParserService{
 			SearchFirstAndLastResult data = response.getSearchFirstAndLastTrainbyFRCodeService();
 			SearchFirstAndLastInfo info = data.getRow().get(0);
 			String result;
-			System.out.println(data.getResult().getMessage());
 			result = info.getLinenum() + " " + info.getInOutTag() + " " + info.getStationName() + "역"+ "\n"
 					+ "첫차 : " + info.getFSubwaySName() + " -> " + info.getFSubwayEName() + " " + info.getFirstTime() + "\n"
 					+ "막차 : " + info.getLSubwaySName() + " -> " + info.getLSubwayEName() + " " + info.getLastTime() + "\n";

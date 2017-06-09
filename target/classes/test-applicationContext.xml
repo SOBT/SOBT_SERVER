@@ -11,7 +11,7 @@
     <!-- annotation 사용을 위해 설정  -->
     <context:annotation-config />
     <!-- StationDataDao 등록 -->
-    <bean id = "stationDataDao" class = "sobt.dao.subway.JdbcUserDataDao">
+    <bean id = "stationDataDao" class = "sobt.dao.subway.JdbcStationDataDao">
         <property name = "dataSource" ref="dataSource"/>
         <property name = "sqlService" ref="sqlService"/>
     </bean>
@@ -90,5 +90,6 @@
         <property name = "username" value = "root"/>
         <property name = "password" value = "song9207108"/>
     </bean>
+    
     
 </beans>
