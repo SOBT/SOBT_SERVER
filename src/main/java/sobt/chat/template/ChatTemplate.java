@@ -69,6 +69,7 @@ public class ChatTemplate {
 		} finally {
 			if (update) {
 				userService.updateUser(user);
+				userService.addUserData(userData);
 			} else {
 				userService.addUser(user, userData);
 			}
