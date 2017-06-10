@@ -27,7 +27,7 @@ public enum Status {
 			return WEATHER;
 		}else if(value.equals("지하철 정보")){
 			return SUBWAY;
-		} else if(value.equals("번역")){
+		} else if(value.equals("문장번역")){
 			return TRANSLATE;
 		}else{
 			throw new AssertionError("Unknown value: " + value);

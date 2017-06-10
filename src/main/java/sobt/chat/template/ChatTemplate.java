@@ -14,83 +14,98 @@ import sobt.domain.user.UserData;
 import sobt.user.service.UserService;
 
 public class ChatTemplate {
-	
+
 	private UserService userService;
-	private MessageService msgService;
 	private WeatherApiManager weatherApiManager;
-	public void setUserService(UserService userService){
-		this.userService = userService;
+	private MessageService msgService;
+	private TranslateCallback translateCallback;
+	
+	public void setTranslateCallback(TranslateCallback translateCallback){
+		this.translateCallback = translateCallback;
 	}
-	public void setMessageService(MessageService msgService){
+
+	public void setMessageService(MessageService msgService) {
 		this.msgService = msgService;
 	}
-	public void setWeatherApiManager(WeatherApiManager weatherApiManager){
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public void setWeatherApiManager(WeatherApiManager weatherApiManager) {
 		this.weatherApiManager = weatherApiManager;
 	}
-	
-	public MessageVo doChatProcess(KakaoUser kakaoUser){
+
+	public MessageVo doChatProcess(KakaoUser kakaoUser) {
 		ChatResult cs = null;
 		ChatCallback chatCallback = null;
 		UserData userData = null;
 		boolean update = true;
 		User user = userService.getUser(kakaoUser.getUser_key());
-		if(user == null){
+		if (user == null) {
 			user = new User();
 			user.setUserId(kakaoUser.getUser_key());
 			user.setDefaultStatus();
 			update = false;
 		}
-		userData = new UserData(kakaoUser.getUser_key(),kakaoUser.getContent(),kakaoUser.getType());
-		try{
-			user = checkStatus(user,userData);
+		userData = new UserData(kakaoUser.getUser_key(), kakaoUser.getContent(), kakaoUser.getType());
+		try {
+			if(userData.getUserContent().equals("처음")){
+				user.setDefaultStatus();
+				Keyboard keyboard = msgService.makeKeyboard("날씨 정보", "지하철 정보", "문장번역");
+				MessageVo msgVo = new MessageVo();
+				msgVo.setKeyboard(keyboard);
+			    return msgVo;
+			}
+			user = checkStatus(user, userData);
 			chatCallback = getChatCallback(user);
 			cs = chatCallback.doProcessChat(user, userData.getUserContent());
 			user = cs.getUser();
 			return cs.getMessageVo();
-		}catch(AssertionError e){
+		} catch (AssertionError e) {
 			cs = prcsProcessException(user);
 			user = cs.getUser();
 			return cs.getMessageVo();
-		}finally{
-			if(update){
+		} finally {
+			if (update) {
 				userService.updateUser(user);
-			}else{ 
+				userService.addUserData(userData);
+			} else {
 				userService.addUser(user, userData);
 			}
 		}
-		
-	}
-	
-	
-	//사용자 상태에 따라 callback 설정.
-	private ChatCallback getChatCallback(User user){
-		switch(user.getStatus().intValue()){
-			case 1 :
-				return new ChatCallback(){
 
-					@Override
-					public ChatResult doProcessChat(User user, String text) {
-						// TODO Auto-generated method stub
-						user.setDefaultStatus();
-						Message message = msgService.makeMessage(weatherApiManager.getWeatherAll());
-						Keyboard keyboard = msgService.makeKeyboard("날씨 정보","지하철 정보","영화 정보");
-						MessageVo msgVo = new MessageVo();
-						msgVo.setKeyboard(keyboard);
-						msgVo.setMessage(message);
-						return new ChatResult(user,msgVo);
-					}};
-			case 2 :
-				throw new AssertionError();
-			case 3 : 
-				throw new AssertionError();
-			default :
-				throw new AssertionError();
+	}
+
+	// 사용자 상태에 따라 callback 설정.
+	private ChatCallback getChatCallback(User user) {
+		switch (user.getStatus().intValue()) {
+		case 1:
+			return new ChatCallback() {
+
+				@Override
+				public ChatResult doProcessChat(User user, String text) {
+					// TODO Auto-generated method stub
+					user.setDefaultStatus();
+					Message message = msgService.makeMessage(weatherApiManager.getWeatherAll());
+					Keyboard keyboard = msgService.makeKeyboard("날씨 정보", "지하철 정보", "문장번역");
+					MessageVo msgVo = new MessageVo();
+					msgVo.setKeyboard(keyboard);
+					msgVo.setMessage(message);
+					return new ChatResult(user, msgVo);
+				}
+			};
+		case 2:
+			throw new AssertionError();
+		case 3:
+			return this.translateCallback;
+		default:
+			throw new AssertionError();
 		}
 	}
-	
-	//사용자 Status 확인 및 설정.
+
+	// 사용자 Status 확인 및 설정.
 	private User checkStatus(User user, UserData userData) throws AssertionError {
-		System.out.println(user.getUserId());
 		if (user.getStatus().equals(Status.NORMAL)) {
 			user.setStatus(Status.valueOfString(userData.getUserContent()));
 			return user;
@@ -98,17 +113,16 @@ public class ChatTemplate {
 			return user;
 		}
 	}
-	
-	//예외 처리 로직.
-	private ChatResult prcsProcessException(User user){
+
+	// 예외 처리 로직.
+	private ChatResult prcsProcessException(User user) {
 		user.setDefaultStatus();
 		MessageVo msgVo = new MessageVo();
 		Message message = msgService.makeMessage("해당 기능은 아직 준비 중입니다!");
-		Keyboard keyboard = msgService.makeKeyboard("날씨 정보","지하철 정보","영화 정보");
+		Keyboard keyboard = msgService.makeKeyboard("날씨 정보", "지하철 정보", "문장번역");
 		msgVo.setKeyboard(keyboard);
 		msgVo.setMessage(message);
-		return new ChatResult(user,msgVo);
+		return new ChatResult(user, msgVo);
 	}
-	
-	
+
 }

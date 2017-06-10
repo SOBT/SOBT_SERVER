@@ -45,5 +45,11 @@ public class BasicUserService implements UserService{
 		// TODO Auto-generated method stub
 		userDao.updateUser(user);
 	}
+	@Override
+	public void addUserData(UserData userData) {
+		// TODO Auto-generated method stub
+		userDataDao.addUserData(userData);
+		
+	}
 
 }
