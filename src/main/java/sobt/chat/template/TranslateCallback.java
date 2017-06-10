@@ -28,7 +28,7 @@ public class TranslateCallback implements ChatCallback {
 			user.setSubStatus(checkSubStatus(text));
 			if(user.getSubStatus().equals(SubStatus.NORMAL)){
 				String resultText = "";
-				resultText += "1.한국어 -> 영어로 번역.\n ";
+				resultText += " 1.한국어 -> 영어로 번역.\n ";
 				resultText += "2.한국어 -> 일어로 번역.\n ";
 				resultText += "3.한국어 -> 중국어로 번역.\n ";
 				resultText += "4.영문  -> 한국어로 번역.\n ";
@@ -60,7 +60,7 @@ public class TranslateCallback implements ChatCallback {
 			if(text.equals("이전")){
 				user.setSubStatus(SubStatus.NORMAL);
 				String resultText = "";
-				resultText += "1.한국어 -> 영어로 번역.\n ";
+				resultText += " 1.한국어 -> 영어로 번역.\n ";
 				resultText += "2.한국어 -> 일어로 번역.\n ";
 				resultText += "3.한국어 -> 중국어로 번역.\n ";
 				resultText += "4.영문  -> 한국어로 번역.\n ";
@@ -75,11 +75,6 @@ public class TranslateCallback implements ChatCallback {
 				
 			}else {
 				String resultText = this.translateService.translateSentence(Translate.valueOf(user.getSubStatus().initValue()), text);
-				resultText+= "\n\n";
-				resultText += "번역할 문장을 입력해 주세요.\n";
-				resultText+= "이전단계로 돌아가려면" +"\"이전\"" +"을 입력해주세요";
-				resultText+= "\n";
-				resultText+= "처음단계로 돌아가려면" +"\"처음\"" +"을입력해주세요";
 				Message message = msgService.makeMessage(resultText);
 				msgVo = new MessageVo();
 				msgVo.setMessage(message);

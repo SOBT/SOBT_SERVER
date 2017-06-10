@@ -2,24 +2,19 @@
 <sqlmap xmlns="http://www.example.org/sqlmap"
 				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 				xsi:schemaLocation="http://www.epril.com/sqlmap ../../../../../sqlmap.xsd ">
-                
 
-    <!-- subwayStation sql -->
-    <sql key = "addStationData">INSERT INTO STATION_DATA(STATION_CODE, STATION_NM, LINE_NUM, FRCODE) VALUES(?,?,?,?)</sql>
-    <sql key = "getStationData">SELECT STATION_CODE STATION_CODE, STATION_NM STATION_NM, LINE_NUM LINE_NUM, FRCODE FRCODE FROM STATION_DATA WHERE STATION_NM = ? AND LINE_NUM = ? </sql>
-    <sql key = "getStationFRCode">SELECT FRCODE FROM STATION_DATA WHERE STATION_NM = ? AND LINE_NUM = ? </sql>
-    
-    <!-- test sql  -->
+	<!-- test sql  -->
 	<sql key = "test">test</sql>
 	<sql key = "test1">test1</sql>
 
 	<!-- 유저 관련 sql -->
-	<sql key = "addUser">INSERT INTO USER(USER_ID) VALUES(?)</sql>
-	<sql key = "getUser">SELECT USER_ID user_id FROM USER WHERE USER_ID = ?</sql>
+	<sql key = "addUser">INSERT INTO USER(USER_ID,STATUS,SUB_STATUS) VALUES(?,?,?)</sql>
+	<sql key = "getUser">SELECT USER_ID user_id,STATUS status , SUB_STATUS sub_status FROM USER WHERE USER_ID = ?</sql>
+	<sql key = "updateUser">UPDATE USER SET STATUS = ? , SUB_STATUS = ? WHERE USER_ID = ?</sql>
 	<sql key = "getCount">SELECT COUNT(*) FROM USER</sql>
 	<sql key = "deleteAll">DELETE FROM USER</sql>
 
-	<!-- 유저 데이터 관련 sql -->
+	
 	<sql key = "addUserData">INSERT INTO USER_DATA(USER_ID,USER_CONTENT,TYPE,RG_DT) VALUES(?,?,?,sysdate())</sql>
 	<sql key = "getUserData">SELECT seq SEQ, user_id USER_ID, user_content USER_CONTENT, type TYPE, rg_dt RG_DT FROM USER_DATA WHERE USER_ID = ? </sql>
 </sqlmap>
