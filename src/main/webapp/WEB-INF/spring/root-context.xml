@@ -10,7 +10,7 @@
 
     <!-- annotation 사용을 위해 설정  -->
     <context:annotation-config />
-    <!-- TranslateChatCallback 등록 -->
+    <!-- TranslateChatCallback 등록 --> 
     <bean id = "translateCallback" class = "sobt.chat.template.TranslateCallback">
     		<property name = "translateService" ref = "translateService"/>
     		<property name = "messageService" ref = "messageService"/>
@@ -92,9 +92,9 @@
     <!-- DB Connection  -->
     <bean id = "dataSource" class ="org.springframework.jdbc.datasource.SimpleDriverDataSource">
         <property name = "driverClass" value ="com.mysql.jdbc.Driver"/>
-        <property name = "url" value = "jdbc:mysql://localhost:3306/SOBT?useSSL=false"/>
+        <property name = "url" value = "jdbc:mysql://localhost:3306/SOBT?useSSL=false&amp;characterEncoding=UTF-8"/>
         <property name = "username" value = "root"/>
-        <property name = "password" value = "song9207108"/>
+        <property name = "password" value = "5887"/>
     </bean>
 
 
