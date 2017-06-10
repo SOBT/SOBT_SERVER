@@ -22,7 +22,7 @@ public enum Translate {
 		this.value = value;
 	}
 	
-	public Translate valueOf(int value){
+	public static Translate valueOf(int value){
 		switch(value){
 		case 1 : return KO_TO_EN;
 		case 2 : return KO_TO_JA;
