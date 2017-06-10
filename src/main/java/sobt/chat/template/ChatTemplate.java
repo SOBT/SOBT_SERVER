@@ -18,6 +18,7 @@ public class ChatTemplate {
 
 	private UserService userService;
 	private WeatherApiManager weatherApiManager;
+	private SubwayAPIManager subwayApiManager;
 	private MessageService msgService;
 	private TranslateCallback translateCallback;
 	
