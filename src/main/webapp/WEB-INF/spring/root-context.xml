@@ -10,7 +10,7 @@
 
     <!-- annotation 사용을 위해 설정  -->
     <context:annotation-config />
-    <!-- TranslateChatCallback 등록 -->
+    <!-- TranslateChatCallback 등록 --> 
     <bean id = "translateCallback" class = "sobt.chat.template.TranslateCallback">
     		<property name = "translateService" ref = "translateService"/>
     		<property name = "messageService" ref = "messageService"/>
