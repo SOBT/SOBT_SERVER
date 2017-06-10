@@ -18,11 +18,17 @@ public class ChatTemplate {
 
 	private UserService userService;
 	private WeatherApiManager weatherApiManager;
+<<<<<<< HEAD
+	private SubwayAPIManager subwayApiManager;
+	public void setUserService(UserService userService){
+		this.userService = userService;
+=======
 	private MessageService msgService;
 	private TranslateCallback translateCallback;
 	
 	public void setTranslateCallback(TranslateCallback translateCallback){
 		this.translateCallback = translateCallback;
+>>>>>>> 14011ac0963ea93a1d36e48d79b23b42d061908f
 	}
 
 	public void setMessageService(MessageService msgService) {
@@ -36,11 +42,16 @@ public class ChatTemplate {
 	public void setWeatherApiManager(WeatherApiManager weatherApiManager) {
 		this.weatherApiManager = weatherApiManager;
 	}
+<<<<<<< HEAD
 	public void setSubwayAPIManager(SubwayAPIManager subwayApiManager){
 		this.subwayApiManager = subwayApiManager;
 	}
 	
 	public MessageVo doChatProcess(KakaoUser kakaoUser){
+=======
+
+	public MessageVo doChatProcess(KakaoUser kakaoUser) {
+>>>>>>> 14011ac0963ea93a1d36e48d79b23b42d061908f
 		ChatResult cs = null;
 		ChatCallback chatCallback = null;
 		UserData userData = null;
@@ -80,6 +91,73 @@ public class ChatTemplate {
 		}
 
 	}
+<<<<<<< HEAD
+	
+	
+	//사용자 상태에 따라 callback 설정.
+	private ChatCallback getChatCallback(User user){
+		switch(user.getStatus().intValue()){
+			case 1 :
+				return new ChatCallback(){
+					@Override
+					public ChatResult doProcessChat(User user, String text) {
+						// TODO Auto-generated method stub
+						user.setDefaultStatus();
+						Message message = msgService.makeMessage(weatherApiManager.getWeatherAll());
+						Keyboard keyboard = msgService.makeKeyboard("날씨 정보","지하철 정보","영화 정보");
+						MessageVo msgVo = new MessageVo();
+						msgVo.setKeyboard(keyboard);
+						msgVo.setMessage(message);
+						return new ChatResult(user,msgVo);
+					}};
+			case 2 : 
+				user.setSubStatus(SubStatus.SELECT_SUB_SERVICE);
+				return new ChatCallback() {
+					MessageVo msgVo = new MessageVo();
+					Message message;
+					Keyboard keyboard;
+					
+					@Override
+					public ChatResult doProcessChat(User user, String text) {
+						if(user.getSubStatus().equals(SubStatus.SELECT_SUB_SERVICE)) {
+							message = msgService.makeMessage("1. 실시간 지하철 정보\n"+"2. 첫차/막차 정보\n"+"중에서 선택해주세요");
+							if(text.equals("1"))
+								user.setSubStatus(SubStatus.RT_SUB_NAME);
+							else if(text.equals("2"))
+								user.setSubStatus(SubStatus.FL_SUB_LINE);
+							else
+								user.setSubStatus(SubStatus.SELECT_SUB_SERVICE);
+						} else if(user.getSubStatus().equals(SubStatus.RT_SUB_NAME)) {
+							message = msgService.makeMessage("원하는 지하철역을 입력하세요");
+						} else if(user.getSubStatus().equals(SubStatus.RT_RESULT)) {
+							/*
+							user.setDefaultStatus();
+							message = msgService.makeMessage(subwayApiManager.getRealTimeArrival("json", statnNm));
+							keyboard = msgService.makeKeyboard("날씨 정보","지하철 정보","영화 정보");
+							*/
+						} else if(user.getSubStatus().equals(SubStatus.FL_SUB_NAME)) {
+							message = msgService.makeMessage("원하는 지하철역을 입력하세요");
+						} else if(user.getSubStatus().equals(SubStatus.FL_SUB_LINE)) {
+							message = msgService.makeMessage("원하는 호선을 입력하세요");
+						} else if(user.getSubStatus().equals(SubStatus.FL_SUB_INOUT)) {
+							message = msgService.makeMessage("상/하행선을 입력하세요");
+						} else if(user.getSubStatus().equals(SubStatus.FL_RESULT)) {
+							/*
+							user.setDefaultStatus();
+							message = msgService.makeMessage(subwayApiManager.getFirstAndLast("json", LINE_NUM, WEEK_TAG, INOUT_TAG, stationName));
+							keyboard = msgService.makeKeyboard("날씨 정보","지하철 정보","영화 정보");
+							*/
+						}
+						msgVo.setKeyboard(keyboard);
+						msgVo.setMessage(message);
+						return new ChatResult(user,msgVo);
+					}
+				};
+			case 3 : 
+				throw new AssertionError();
+			default :
+				throw new AssertionError();
+=======
 
 	// 사용자 상태에 따라 callback 설정.
 	private ChatCallback getChatCallback(User user) {
@@ -100,52 +178,12 @@ public class ChatTemplate {
 				}
 			};
 		case 2:
-                user.setSubStatus(SubStatus.SELECT_SUB_SERVICE);
-                return new ChatCallback() {
-                    MessageVo msgVo = new MessageVo();
-                    Message message;
-                    Keyboard keyboard;
-                    
-                    @Override
-                    public ChatResult doProcessChat(User user, String text) {
-                        if(user.getSubStatus().equals(SubStatus.SELECT_SUB_SERVICE)) {
-                            message = msgService.makeMessage("1. 실시간 지하철 정보\n"+"2. 첫차/막차 정보\n"+"중에서 선택해주세요");
-                            if(text.equals("1"))
-                                user.setSubStatus(SubStatus.RT_SUB_NAME);
-                            else if(text.equals("2"))
-                                user.setSubStatus(SubStatus.FL_SUB_LINE);
-                            else
-                                user.setSubStatus(SubStatus.SELECT_SUB_SERVICE);
-                        } else if(user.getSubStatus().equals(SubStatus.RT_SUB_NAME)) {
-                            message = msgService.makeMessage("원하는 지하철역을 입력하세요");
-                        } else if(user.getSubStatus().equals(SubStatus.RT_RESULT)) {
-                            /*
-                             user.setDefaultStatus();
-                             message = msgService.makeMessage(subwayApiManager.getRealTimeArrival("json", statnNm));
-                             keyboard = msgService.makeKeyboard("날씨 정보","지하철 정보","영화 정보");
-                             */
-                        } else if(user.getSubStatus().equals(SubStatus.FL_SUB_NAME)) {
-                            message = msgService.makeMessage("원하는 지하철역을 입력하세요");
-                        } else if(user.getSubStatus().equals(SubStatus.FL_SUB_LINE)) {
-                            message = msgService.makeMessage("원하는 호선을 입력하세요");
-                        } else if(user.getSubStatus().equals(SubStatus.FL_SUB_INOUT)) {
-                            message = msgService.makeMessage("상/하행선을 입력하세요");
-                        } else if(user.getSubStatus().equals(SubStatus.FL_RESULT)) {
-                            /*
-                             user.setDefaultStatus();
-                             message = msgService.makeMessage(subwayApiManager.getFirstAndLast("json", LINE_NUM, WEEK_TAG, INOUT_TAG, stationName));
-                             keyboard = msgService.makeKeyboard("날씨 정보","지하철 정보","영화 정보");
-                             */
-                        }
-                        msgVo.setKeyboard(keyboard);
-                        msgVo.setMessage(message);
-                        return new ChatResult(user,msgVo);
-                    }
-                };
+			throw new AssertionError();
 		case 3:
 			return this.translateCallback;
 		default:
 			throw new AssertionError();
+>>>>>>> 14011ac0963ea93a1d36e48d79b23b42d061908f
 		}
 	}
 

@@ -8,5 +8,6 @@ public interface UserService {
 	public void updateUser(User user);
 	public void addUser(User user , UserData userData);
 	public User getUser(String id);
+	public void addUserData(UserData userData);
 
 }
