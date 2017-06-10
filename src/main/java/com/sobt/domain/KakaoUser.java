@@ -21,7 +21,7 @@ package com.sobt.domain;
  * @author namwoo
  * 손댈 것 없음.
  */
-public class User {
+public class KakaoUser {
 	String user_key;// "encryptedUserKey",
 	String type;	// "text"    or "photo"
 	String content; // "차량번호등록" or "http://photo_url/number.jpg"

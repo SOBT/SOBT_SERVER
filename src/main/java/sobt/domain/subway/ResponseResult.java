@@ -5,19 +5,19 @@ public class ResponseResult {
 	String MESSAGE;
 	String code; // 확인
 	String message; //
-	int status; //
+	String status; //
 	
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
 	
 	public String getCode() {
-		return (getStatus()==0)? CODE: code;
+		return (getStatus()==null)? CODE: code;
 		//return CODE;
 	}
 	
 	public String getMessage() {
-		return (getStatus()==0)? MESSAGE: message;
+		return (getStatus()==null)? MESSAGE: message;
 		//return MESSAGE;
 	}
 }

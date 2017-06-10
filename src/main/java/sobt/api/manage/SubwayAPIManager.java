@@ -1,8 +1,10 @@
 package sobt.api.manage;
 
+import java.io.UnsupportedEncodingException;
+
 public interface SubwayAPIManager {
-	public String getRealTimeArrival(String type, String statnNm);
+	public String getRealTimeArrival(String type, String statnNm) throws UnsupportedEncodingException;
 	
-	public String getFirstAndLast(String type, int LINE_NUM, int WEEK_TAG, int INOUT_TAG, String FR_CODE);
+	public String getFirstAndLast(String type, String LINE_NUM, int WEEK_TAG, int INOUT_TAG, String stationName);
 
 }

@@ -45,6 +45,6 @@ public class PapagoServiceTest {
 	
 	@Test
 	public void translateTest(){
-		System.out.println(translateService.translateSentence(Translate.KO_TO_CN, "만나서 반갑습니다."));
+		System.out.println(translateService.translateSentence(Translate.KO_TO_EN, "만나서 반갑습니다. "));
 	}
 }

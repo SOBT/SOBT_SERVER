@@ -45,4 +45,9 @@ public class UserServiceTest {
 		userService.addUser(user.getUserId(), userData1.getUserContent(), userData1.getType());
 		userService.addUser(user.getUserId(), userData2.getUserContent(), userData2.getType());
 	}
+	
+	@Test
+	public void getNullUser(){
+		assertThat(userService.getUser("1"),nullValue());
+	}
 }
