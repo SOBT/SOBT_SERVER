@@ -3,8 +3,8 @@ package sobt.domain.user;
 public enum SubStatus {
 	NORMAL(0),EN_TO_KO(4), KO_TO_EN(1), KO_TO_JA(2), KO_TO_CN(3)
 	,JA_TO_KO(5),CN_TO_KO(6), 
-	SELECT_SUB_SERVICE(10),RT_SUB_NAME(11), RT_RESULT(12),
-	FL_SUB_LINE(13), FL_SUB_NAME(14), FL_SUB_INOUT(15), FL_RESULT(16);
+	SELECT_SUB_SERVICE(10), RT_RESULT(12),
+	FL_SUB_LINE(13), FL_SUB_NAME(14), FL_SUB_INOUT(15);
 	private int subStatus;
 	
 	SubStatus(int subStatus){
@@ -31,18 +31,12 @@ public enum SubStatus {
 				return CN_TO_KO;
 			case 10 :
 				return SELECT_SUB_SERVICE;
-			case 11 :
-				return RT_SUB_NAME;
-			case 12 :
-				return RT_RESULT;
 			case 13 :
 				return FL_SUB_LINE;
 			case 14 :
 				return FL_SUB_NAME;
 			case 15 :
-				return FL_SUB_INOUT;
-			case 16 :
-				return FL_RESULT;			
+				return FL_SUB_INOUT;			
 			case 0 :
 				return NORMAL;
 			default : 

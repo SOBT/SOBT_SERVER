@@ -30,10 +30,11 @@ public class SqlServiceTest {
 	@Test
 	public void sqlRegistryTest(){
 		//등록 
-		sqlRegistry.register("addStationData", "INSERT INTO STATION_DATA(STATION_CODE, STATION_NM, LINE_NUM, FRCODE) VALUES(?,?,?,?)");
+		sqlRegistry.register("addUserLineNum", "UPDATE USER_SUBWAY SET LINE_NUM = ? WHERE USER_ID = ? ");
 		sqlRegistry.register("getStationData", "SELECT STATION_CODE STATION_CODE, STATION_NM STATION_NM, LINE_NUM LINE_NUM, FRCODE FRCODE FROM STATION_DATA WHERE STATION_NM = ? AND LINE_NUM = ? ");
+		//sqlRegistry.register("test", "test");
 		//찾기 
-		assertThat(sqlRegistry.findSql("addStationData"),is("INSERT INTO STATION_DATA(STATION_CODE, STATION_NM, LINE_NUM, FRCODE) VALUES(?,?,?,?)"));
+		assertThat(sqlRegistry.findSql("addUserLineNum"),is("UPDATE USER_SUBWAY SET LINE_NUM = ? WHERE USER_ID = ? "));
 		assertThat(sqlRegistry.findSql("getStationData"),is("SELECT STATION_CODE STATION_CODE, STATION_NM STATION_NM, LINE_NUM LINE_NUM, FRCODE FRCODE FROM STATION_DATA WHERE STATION_NM = ? AND LINE_NUM = ? "));
 	}
 	
@@ -41,14 +42,14 @@ public class SqlServiceTest {
 	public void sqlReaderTest(){
 		sqlReader.read(sqlRegistry);
 	
-		assertThat(sqlRegistry.findSql("addStationData"),is("INSERT INTO STATION_DATA(STATION_CODE, STATION_NM, LINE_NUM, FRCODE) VALUES(?,?,?,?)"));
+		assertThat(sqlRegistry.findSql("addUserLineNum"),is("UPDATE USER_SUBWAY SET LINE_NUM = ? WHERE USER_ID = ? "));
 		assertThat(sqlRegistry.findSql("getStationData"),is("SELECT STATION_CODE STATION_CODE, STATION_NM STATION_NM, LINE_NUM LINE_NUM, FRCODE FRCODE FROM STATION_DATA WHERE STATION_NM = ? AND LINE_NUM = ? "));
 		
 	}
 	
 	@Test
 	public void sqlServiceTest(){
-		assertThat(sqlService.getSql("addStationData"),is("INSERT INTO STATION_DATA(STATION_CODE, STATION_NM, LINE_NUM, FRCODE) VALUES(?,?,?,?)"));
+		assertThat(sqlService.getSql("addUserLineNum"),is("UPDATE USER_SUBWAY SET LINE_NUM = ? WHERE USER_ID = ? "));
 		assertThat(sqlService.getSql("getStationData"),is("SELECT STATION_CODE STATION_CODE, STATION_NM STATION_NM, LINE_NUM LINE_NUM, FRCODE FRCODE FROM STATION_DATA WHERE STATION_NM = ? AND LINE_NUM = ? "));
 	}
 	

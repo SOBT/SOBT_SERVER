@@ -37,10 +37,8 @@ public class BasicSubwayAPIManager implements SubwayAPIManager{
 	}
 	
 	@Override
-	public String getFirstAndLast(String type, String LINE_NUM, int WEEK_TAG, int INOUT_TAG, String stationName) {
+	public String getFirstAndLast(String type, String LINE_NUM, int WEEK_TAG, String INOUT_TAG, String stationName) {
 		//IOException + Runtime
-		//Date date = new Date(); 
-		//date.getDay(); (0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday)
 		String frcode = stationDataDao.getStationFRCode(stationName, LINE_NUM);
 		String url = String.format(SOBTConstant.FIRST_AND_LAST_SUBWAY_API_URL, SOBTConstant.FIRST_AND_LAST_PRODUCT_KEY, type , LINE_NUM, WEEK_TAG, INOUT_TAG, frcode);
 		parserService = new SearchFirstAndLastFRCodeParser();
