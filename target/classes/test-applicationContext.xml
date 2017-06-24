@@ -7,9 +7,25 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
     <!-- Root Context: defines shared resources visible to all other web components -->
-    
+
     <!-- annotation 사용을 위해 설정  -->
     <context:annotation-config />
+    <!-- SubwayChatCallback 등록 -->
+    <bean id = "subwayCallback" class = "sobt.chat.template.SubwayCallback">
+        <property name = "subwayAPIManager" ref = "subwayAPIManager"/>
+        <property name = "userService" ref = "userService"/>
+        <property name = "messageService" ref = "messageService"/>
+    </bean>
+    <!-- UserSubwayDao 등록 -->
+    <bean id = "userSubwayDao" class = "sobt.dao.user.JdbcUserSubwayDao">
+        <property name = "dataSource" ref="dataSource"/>
+        <property name = "sqlService" ref="sqlService"/>
+    </bean>
+    <!-- TranslateChatCallback 등록 -->
+    <bean id = "translateCallback" class = "sobt.chat.template.TranslateCallback">
+    		<property name = "translateService" ref = "translateService"/>
+    		<property name = "messageService" ref = "messageService"/>
+    </bean>
     <!-- StationDataDao 등록 -->
     <bean id = "stationDataDao" class = "sobt.dao.subway.JdbcStationDataDao">
         <property name = "dataSource" ref="dataSource"/>
@@ -20,6 +36,8 @@
         <property name = "userService" ref = "userService"/>
         <property name = "messageService" ref = "messageService"/>
         <property name = "weatherApiManager" ref = "weatherApiManager"/>
+        <property name = "translateCallback" ref = "translateCallback"/>
+        <property name = "subwayCallback" ref = "subwayCallback"/>
     </bean>
     <!-- TranslateService 등록 -->
     <bean id = "translateService" class = "sobt.translate.service.PapagoService">
@@ -40,6 +58,7 @@
     <bean id = "userService" class = "sobt.user.service.BasicUserService">
         <property name = "userDao" ref = "userDao"/>
         <property name = "userDataDao" ref = "userDataDao"/>
+        <property name = "userSubwayDao" ref = "userSubwayDao"/>
     </bean>
     <!-- MessageService -->
     <bean id = "messageService" class = "sobt.domain.message.MessageServiceImpl"/>
@@ -53,13 +72,13 @@
     <!-- SubwayAPIManager 등록 -->
     <bean id = "subwayAPIManager" class = "sobt.api.manage.BasicSubwayAPIManager">
         <property name = "stationDataDao" ref = "stationDataDao"/>
-        <property name = "httpService" ref = "urlHttpService"/>
+        <property name = "httpService" ref= "urlHttpService"/>
     </bean>
     <!-- httpService 등록 -->
     <bean id = "httpService" class = "sobt.http.service.ApacheHttpService">
         <property name = "apacheHttpTemplate" ref = "apacheHttpTemplate"/>
     </bean>
-    
+
     <!-- userDao 등록 -->
     <bean id = "userDao" class = "sobt.dao.user.JdbcUserDao">
         <property name = "dataSource" ref="dataSource"/>
@@ -69,26 +88,27 @@
     <bean id="unmarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
         <property name="contextPath" value="sobt.sql.service.jaxb" />
     </bean>
-    
+
     <!-- SqlReader 등록 -->
     <bean id = "sqlReader" class = "sobt.sql.service.OxmSqlReader">
         <property name = "unmarshaller" ref = "unmarshaller"/>
     </bean>
     <!-- SqlRegistry 등록 -->
     <bean id = "sqlRegistry" class = "sobt.sql.service.HashMapSqlRegistry"/>
-    
+
     <!-- SqlService 등록 -->
     <bean id = "sqlService" class = "sobt.sql.service.BasicSqlService">
         <property name = "sqlReader" ref = "sqlReader"/>
         <property name = "sqlRegistry" ref ="sqlRegistry"/>
     </bean>
-    
+
     <!-- DB Connection  -->
     <bean id = "dataSource" class ="org.springframework.jdbc.datasource.SimpleDriverDataSource">
         <property name = "driverClass" value ="com.mysql.jdbc.Driver"/>
-        <property name = "url" value = "jdbc:mysql://localhost:3306/SOBT?useSSL=false"/>
+        <property name = "url" value = "jdbc:mysql://localhost:3306/SOBT?useSSL=false&amp;characterEncoding=UTF-8"/>
         <property name = "username" value = "root"/>
         <property name = "password" value = "5887"/>
     </bean>
-    
+
+
 </beans>

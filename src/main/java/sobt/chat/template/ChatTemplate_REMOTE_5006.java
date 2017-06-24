@@ -2,7 +2,6 @@ package sobt.chat.template;
 
 import com.sobt.domain.KakaoUser;
 
-import sobt.api.manage.SubwayAPIManager;
 import sobt.api.manage.WeatherApiManager;
 import sobt.domain.message.Keyboard;
 import sobt.domain.message.Message;
@@ -18,7 +17,6 @@ public class ChatTemplate {
 
 	private UserService userService;
 	private WeatherApiManager weatherApiManager;
-	private SubwayCallback subwayCallback;
 	private MessageService msgService;
 	private TranslateCallback translateCallback;
 	
@@ -37,12 +35,8 @@ public class ChatTemplate {
 	public void setWeatherApiManager(WeatherApiManager weatherApiManager) {
 		this.weatherApiManager = weatherApiManager;
 	}
-	
-	public void setSubwayCallback(SubwayCallback subwayCallback) {
-		this.subwayCallback = subwayCallback;
-	}
-	
-	public MessageVo doChatProcess(KakaoUser kakaoUser){
+
+	public MessageVo doChatProcess(KakaoUser kakaoUser) {
 		ChatResult cs = null;
 		ChatCallback chatCallback = null;
 		UserData userData = null;
@@ -102,7 +96,7 @@ public class ChatTemplate {
 				}
 			};
 		case 2:
-			return this.subwayCallback;
+			throw new AssertionError();
 		case 3:
 			return this.translateCallback;
 		default:

@@ -24,12 +24,12 @@ public class SubwayServiceTest {
 	
 	@Test
 	public void SubwayServiceTest() throws UnsupportedEncodingException{
-		System.out.println(subwayApimanager.getFirstAndLast("json", "1", 1, 2, "소요산"));
+		//System.out.println(subwayApimanager.getFirstAndLast("json", "1", 1, 2, "소요산"));
 		//System.out.println(subwayApimanager.getFirstAndLast("json", "4", 1, 2, "노원"));
 		//System.out.println(subwayApimanager.getRealTimeArrival("json", "신이문"));
 		//System.out.println(subwayApimanager.getRealTimeArrival("json","상계"));
 		//Date date = new Date();
-		//System.out.println(date.getDay());
+		//System.out.println(date.getDate());
 	}
 	
 
