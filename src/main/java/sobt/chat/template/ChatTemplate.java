@@ -21,8 +21,8 @@ public class ChatTemplate {
 	private SubwayCallback subwayCallback;
 	private MessageService msgService;
 	private TranslateCallback translateCallback;
-	
-	public void setTranslateCallback(TranslateCallback translateCallback){
+
+	public void setTranslateCallback(TranslateCallback translateCallback) {
 		this.translateCallback = translateCallback;
 	}
 
@@ -37,12 +37,12 @@ public class ChatTemplate {
 	public void setWeatherApiManager(WeatherApiManager weatherApiManager) {
 		this.weatherApiManager = weatherApiManager;
 	}
-	
+
 	public void setSubwayCallback(SubwayCallback subwayCallback) {
 		this.subwayCallback = subwayCallback;
 	}
-	
-	public MessageVo doChatProcess(KakaoUser kakaoUser){
+
+	public MessageVo doChatProcess(KakaoUser kakaoUser) {
 		ChatResult cs = null;
 		ChatCallback chatCallback = null;
 		UserData userData = null;
@@ -56,12 +56,12 @@ public class ChatTemplate {
 		}
 		userData = new UserData(kakaoUser.getUser_key(), kakaoUser.getContent(), kakaoUser.getType());
 		try {
-			if(userData.getUserContent().equals("처음")){
+			if (userData.getUserContent().equals("처음")) {
 				user.setDefaultStatus();
 				Keyboard keyboard = msgService.makeKeyboard("날씨 정보", "지하철 정보", "문장번역");
 				MessageVo msgVo = new MessageVo();
 				msgVo.setKeyboard(keyboard);
-			    return msgVo;
+				return msgVo;
 			}
 			user = checkStatus(user, userData);
 			chatCallback = getChatCallback(user);

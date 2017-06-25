@@ -15,22 +15,6 @@
         <property name = "dataSource" ref="dataSource"/>
         <property name = "sqlService" ref="sqlService"/>
     </bean>
-    <!-- UserSubwayDao 등록-->
-    <bean id = "userSubwayDao" class = "sobt.dao.user.JdbcUserSubwayDao">
-        <property name = "dataSource" ref = "dataSource"/>
-        <property name = "sqlService" ref = "sqlService"/>
-    </bean>
-    <!-- SubwayChatCallback 등록 -->
-    <bean id = "subwayCallback" class = "sobt.chat.template.SubwayCallback">
-        <property name = "subwayAPIManager" ref = "subwayAPIManager"/>
-        <property name = "userService" ref = "userService"/>
-        <property name = "messageService" ref = "messageService"/>
-    </bean>
-    <!-- TranslateChatCallback 등록 -->
-    <bean id = "translateCallback" class = "sobt.chat.template.TranslateCallback">
-          <property name = "translateService" ref = "translateService"/>
-          <property name = "messageService" ref = "messageService"/>
-    </bean>
     <!-- StationDataDao 등록 -->
     <bean id = "stationDataDao" class = "sobt.dao.subway.JdbcStationDataDao">
         <property name = "dataSource" ref="dataSource"/>
@@ -41,8 +25,6 @@
         <property name = "userService" ref = "userService"/>
         <property name = "messageService" ref = "messageService"/>
         <property name = "weatherApiManager" ref = "weatherApiManager"/>
-        <property name = "subwayCallback" ref = "subwayCallback"/>
-        <property name = "translateCallback" ref = "translateCallback"/>
     </bean>
     <!-- TranslateService 등록 -->
     <bean id = "translateService" class = "sobt.translate.service.PapagoService">
@@ -63,7 +45,6 @@
     <bean id = "userService" class = "sobt.user.service.BasicUserService">
         <property name = "userDao" ref = "userDao"/>
         <property name = "userDataDao" ref = "userDataDao"/>
-        <property name = "userSubwayDao" ref = "userSubwayDao"/>
     </bean>
     <!-- MessageService -->
     <bean id = "messageService" class = "sobt.domain.message.MessageServiceImpl"/>
@@ -73,13 +54,11 @@
     <bean id = "weatherApiManager" class = "sobt.api.manage.BasicWeatherApiManager">
         <property name = "httpService" ref= "urlHttpService"/>
         <property name = "appkey" value ="1c33a135-5e89-34c1-baf9-ba0d453a29e8"/>
-        <property name = "weatherDataDao" ref="weatherDataDao"/>
-
     </bean>
     <!-- SubwayAPIManager 등록 -->
     <bean id = "subwayAPIManager" class = "sobt.api.manage.BasicSubwayAPIManager">
         <property name = "stationDataDao" ref = "stationDataDao"/>
-        <property name = "httpService" ref= "urlHttpService"/>
+        <property name = "httpService" ref = "urlHttpService"/>
     </bean>
     <!-- httpService 등록 -->
     <bean id = "httpService" class = "sobt.http.service.ApacheHttpService">
@@ -112,10 +91,9 @@
     <!-- DB Connection  -->
     <bean id = "dataSource" class ="org.springframework.jdbc.datasource.SimpleDriverDataSource">
         <property name = "driverClass" value ="com.mysql.jdbc.Driver"/>
-        <property name = "url" value = "jdbc:mysql://localhost:3306/SOBT?useSSL=false&amp;characterEncoding=UTF-8"/>
+        <property name = "url" value = "jdbc:mysql://localhost:3306/SOBT?useSSL=false"/>
         <property name = "username" value = "root"/>
         <property name = "password" value = "5887"/>
     </bean>
-
 
 </beans>
