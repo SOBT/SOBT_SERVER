@@ -12,6 +12,7 @@ import sobt.domain.user.Status;
 import sobt.domain.user.SubStatus;
 import sobt.domain.user.User;
 import sobt.domain.user.UserData;
+import sobt.domain.user.UserSubway;
 import sobt.user.service.UserService;
 
 public class ChatTemplate {
@@ -46,6 +47,7 @@ public class ChatTemplate {
 		ChatResult cs = null;
 		ChatCallback chatCallback = null;
 		UserData userData = null;
+		UserSubway userSubway = null;
 		boolean update = true;
 		User user = userService.getUser(kakaoUser.getUser_key());
 		if (user == null) {
@@ -55,6 +57,7 @@ public class ChatTemplate {
 			update = false;
 		}
 		userData = new UserData(kakaoUser.getUser_key(), kakaoUser.getContent(), kakaoUser.getType());
+		userSubway = new UserSubway(kakaoUser.getUser_key());
 		try {
 			if (userData.getUserContent().equals("처음")) {
 				user.setDefaultStatus();
@@ -76,8 +79,9 @@ public class ChatTemplate {
 			if (update) {
 				userService.updateUser(user);
 				userService.addUserData(userData);
+				userService.addUserSubway(userSubway);
 			} else {
-				userService.addUser(user, userData);
+				userService.addUser(user, userData, userSubway);
 			}
 		}
 
