@@ -3,6 +3,7 @@ package sobt.parser.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import sobt.domain.message.MessageVo;
 import sobt.domain.weather.WeatherAllPlaceData;
 import sobt.domain.weather.WeatherAllPlaceDataLocation;
 
@@ -16,7 +17,7 @@ public class WeatherAllPlaceParser implements ParserService {
 		List<WeatherAllPlaceDataLocation> original = data.getChannel().getName().getDescription().getBody().getLocation();
 		
 		List<WeatherAllPlaceDataLocation> need = new ArrayList<WeatherAllPlaceDataLocation>();
-		
+
 		need.add(new WeatherAllPlaceDataLocation("서울"));
 		need.add(new WeatherAllPlaceDataLocation("인천"));
 		need.add(new WeatherAllPlaceDataLocation("춘천"));
@@ -46,7 +47,7 @@ public class WeatherAllPlaceParser implements ParserService {
 		
 		sentence = need.get(i).getCity() + " "
 				+ TranseEmoticon(need.get(i).getData().get(0).getWf()) +"→"
-				+ TranseEmoticon(need.get(i).getData().get(2).getWf()) +" "	
+				+ TranseEmoticon(need.get(i).getData().get(1).getWf()) +" "	
 				+ need.get(i).getData().get(0).getTmn()+"℃ → "
 				+ need.get(i++).getData().get(0).getTmx()+"℃\n";
 		
@@ -54,11 +55,12 @@ public class WeatherAllPlaceParser implements ParserService {
 			
 			sentence += need.get(i).getCity() + " "
 					+ TranseEmoticon(need.get(i).getData().get(0).getWf()) +"→"
-					+ TranseEmoticon(need.get(i).getData().get(2).getWf()) +" "	
+					+ TranseEmoticon(need.get(i).getData().get(1).getWf()) +" "	
 					+ need.get(i).getData().get(0).getTmn()+"℃ → "
 					+ need.get(i++).getData().get(0).getTmx()+"℃\n";
 		
 		}
+		
 		return sentence;
 	}
 	

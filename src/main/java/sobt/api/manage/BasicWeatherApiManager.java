@@ -1,17 +1,29 @@
 package sobt.api.manage;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+
+import sobt.dao.weather.WeatherDataDao;
+import sobt.domain.message.MessageVo;
 import sobt.domain.weather.WeatherAllPlaceData;
+import sobt.domain.weather.WeatherData;
 import sobt.http.service.HttpService;
 import sobt.parser.service.ParserService;
 import sobt.parser.service.WeatherAllPlaceParser;
 import sobt.parser.service.WeatherLocationParser;
 import sobt.util.SOBTConstant;
 
+
 public class BasicWeatherApiManager implements WeatherApiManager{
 	
 	private HttpService httpService;
 	private ParserService parserService;
 	private String appKey;
+	private WeatherDataDao weatherDataDao;
+	
 	
 	public void setAppkey(String appkey){
 		this.appKey = appkey;
@@ -25,6 +37,11 @@ public class BasicWeatherApiManager implements WeatherApiManager{
 	}
 	
 	
+	
+	public void setWeatherDataDao(WeatherDataDao weatherDataDao) {
+		this.weatherDataDao = weatherDataDao;
+	}
+
 	@Override
 	public String getWeatherMin(String city, String county, String village) {
 		
@@ -37,10 +54,13 @@ public class BasicWeatherApiManager implements WeatherApiManager{
 	@Override
 	public String getWeatherAll() {
 
-		String url = SOBTConstant.WEATHER_API_URL_ALL;
-		parserService = new WeatherAllPlaceParser();
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String ymd = format.format(date);
 		
-		return parserService.Parse(httpService.doHttpGet(url));
+		WeatherData data = weatherDataDao.getWeather(ymd);
+		
+		return data.getSentence();
 	}
 
 }
