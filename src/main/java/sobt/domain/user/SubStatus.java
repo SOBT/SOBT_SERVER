@@ -31,6 +31,8 @@ public enum SubStatus {
 				return CN_TO_KO;
 			case 10 :
 				return SELECT_SUB_SERVICE;
+			case 12 :
+				return RT_RESULT;
 			case 13 :
 				return FL_SUB_LINE;
 			case 14 :
