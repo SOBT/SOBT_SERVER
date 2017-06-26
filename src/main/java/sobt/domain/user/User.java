@@ -4,7 +4,15 @@ public class User {
 	private String userId;
 	private Status status;
 	private SubStatus subStatus;
+	private String rqDt;
 	
+
+	public String getRqDt() {
+		return rqDt;
+	}
+	public void setRqDt(String rqDt) {
+		this.rqDt = rqDt;
+	}
 	public Status getStatus() {
 		return status;
 	}

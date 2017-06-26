@@ -30,6 +30,7 @@ public class JdbcUserDao implements UserDao {
 			user.setUserId(rs.getString("user_id"));
 			user.setStatus(Status.valueOf(rs.getInt("status")));
 			user.setSubStatus(SubStatus.valueOf(rs.getInt("sub_status")));
+			user.setRqDt(rs.getString("rq_dt"));
 			return user;
 		}};
 	
