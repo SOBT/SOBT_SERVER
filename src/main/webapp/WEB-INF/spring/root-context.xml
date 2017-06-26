@@ -10,6 +10,11 @@
 
     <!-- annotation 사용을 위해 설정  -->
     <context:annotation-config />
+    <!-- WeatherDataDao 등록 -->
+    <bean id = "weatherDataDao" class = "sobt.dao.weather.JdbcWeatherDataDao">
+        <property name = "dataSource" ref="dataSource"/>
+        <property name = "sqlService" ref="sqlService"/>
+    </bean>
     <!-- UserSubwayDao 등록-->
     <bean id = "userSubwayDao" class = "sobt.dao.user.JdbcUserSubwayDao">
         <property name = "dataSource" ref = "dataSource"/>
@@ -21,10 +26,10 @@
         <property name = "userService" ref = "userService"/>
         <property name = "messageService" ref = "messageService"/>
     </bean>
-    <!-- TranslateChatCallback 등록 --> 
+    <!-- TranslateChatCallback 등록 -->
     <bean id = "translateCallback" class = "sobt.chat.template.TranslateCallback">
-    		<property name = "translateService" ref = "translateService"/>
-    		<property name = "messageService" ref = "messageService"/>
+          <property name = "translateService" ref = "translateService"/>
+          <property name = "messageService" ref = "messageService"/>
     </bean>
     <!-- StationDataDao 등록 -->
     <bean id = "stationDataDao" class = "sobt.dao.subway.JdbcStationDataDao">
@@ -68,6 +73,8 @@
     <bean id = "weatherApiManager" class = "sobt.api.manage.BasicWeatherApiManager">
         <property name = "httpService" ref= "urlHttpService"/>
         <property name = "appkey" value ="1c33a135-5e89-34c1-baf9-ba0d453a29e8"/>
+        <property name = "weatherDataDao" ref="weatherDataDao"/>
+
     </bean>
     <!-- SubwayAPIManager 등록 -->
     <bean id = "subwayAPIManager" class = "sobt.api.manage.BasicSubwayAPIManager">

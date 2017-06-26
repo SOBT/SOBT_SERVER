@@ -94,9 +94,9 @@ public class BasicUserService implements UserService{
 	public String getUserInOut(String userId) {
 		return userSubwayDao.getUserSubway(userId).get(0).getInOut();
 	}
+	
 	@Override
 	public String getUserLineNum(String userId) {
 		return userSubwayDao.getUserSubway(userId).get(0).getLineNum();
 	}
-
 }
