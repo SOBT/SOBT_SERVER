@@ -2,7 +2,6 @@ package sobt.dao.user;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -60,8 +59,8 @@ public class JdbcUserSubwayDao implements UserSubwayDao {
 	}
 	
 	@Override
-	public List<UserSubway> getUserSubway(String user_Id) {
-		return this.jdbcTemplate.query(this.sqlService.getSql("getUserSubway"), new Object[] {user_Id}, this.userSubwayMapper);
+	public UserSubway getUserSubway(String user_Id) {
+		return this.jdbcTemplate.query(this.sqlService.getSql("getUserSubway"), new Object[] {user_Id}, this.userSubwayMapper).get(0);
 	}
 	
 

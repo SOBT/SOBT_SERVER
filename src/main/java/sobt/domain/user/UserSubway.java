@@ -14,6 +14,9 @@ public class UserSubway {
 	
 	public UserSubway(String user_id) {
 		this.user_id = user_id;
+		this.line_num = null;
+		this.in_out = null;
+		this.station_nm = null;
 	}
 	
 	public UserSubway(String line_num, String in_out, String station_nm, String user_id) {

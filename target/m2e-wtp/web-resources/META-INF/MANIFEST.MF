@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: Song
 Build-Jdk: 1.8.0_111
+=======
+Built-By: LeeHaeWon
+Build-Jdk: 1.8.0_60
+>>>>>>> 64ae7c7cf3e2f6ecfcf3bf3bf01eb44e87a4c391
 Created-By: Maven Integration for Eclipse
 

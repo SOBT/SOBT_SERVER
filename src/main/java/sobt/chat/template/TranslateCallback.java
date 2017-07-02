@@ -35,7 +35,7 @@ public class TranslateCallback implements ChatCallback {
 				resultText += "5.일어  -> 한국어로 번역.\n ";
 				resultText += "6.중국어 -> 한국어로 번역.\n\n";
 				resultText += "원하시는 번역을 숫자로 입력해주세요.\n ";
-				resultText+= "처음단계로 돌아가려면" +"\"처음\"" +"을입력해주세요";
+				resultText+= "처음단계로 돌아가려면" +"\"처음\"" +"을 입력해주세요";
 				
 				Message message = msgService.makeMessage(resultText);
 				MessageVo msgVo = new MessageVo();
@@ -47,7 +47,7 @@ public class TranslateCallback implements ChatCallback {
 				resultText+= "\n\n";
 				resultText+= "이전단계로 돌아가려면" +"\"이전\"" +"을 입력해주세요";
 				resultText+= "\n";
-				resultText+= "처음단계로 돌아가려면" +"\"처음\"" +"을입력해주세요";
+				resultText+= "처음단계로 돌아가려면" +"\"처음\"" +"을 입력해주세요";
 				Message message = msgService.makeMessage(resultText);
 				
 				MessageVo msgVo = new MessageVo();
@@ -67,7 +67,7 @@ public class TranslateCallback implements ChatCallback {
 				resultText += "5.일어  -> 한국어로 번역.\n ";
 				resultText += "6.중국어 -> 한국어로 번역.\n\n";
 				resultText += "원하시는 번역을 숫자로 입력해주세요.\n ";
-				resultText+= "처음단계로 돌아가려면" +"\"처음\"" +"을입력해주세요";
+				resultText+= "처음단계로 돌아가려면" +"\"처음\"" +"을 입력해주세요";
 				
 				Message message = msgService.makeMessage(resultText);
 				msgVo = new MessageVo();

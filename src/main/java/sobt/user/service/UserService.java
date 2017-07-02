@@ -16,8 +16,11 @@ public interface UserService {
 	public void addUserLineNum(User user, String line_num);
 	public void addUserInOut(User user, String in_out);
 	public void addUserStationNm(User user, String station_nm);
+	
+	public UserSubway getUserSubway(String user_id);
 	public String getUserStationNm(String user_id);
 	public String getUserInOut(String user_id);
 	public String getUserLineNum(String user_id);
+	//public String getUserSubwayUser(String user_id);
 
 }

@@ -1,6 +1,5 @@
 package sobt.user.service;
 
-
 import sobt.dao.user.UserDao;
 import sobt.dao.user.UserDataDao;
 import sobt.dao.user.UserSubwayDao;
@@ -29,11 +28,11 @@ public class BasicUserService implements UserService{
 		// TODO Auto-generated method stub
 		User user = new User(user_id);
 		UserData userData = new UserData(user_id,content,type);
-		UserSubway userSubway = new UserSubway(user_id);
+		//UserSubway userSubway = new UserSubway(user_id);
 		
 		userDao.addUser(user);
 		userDataDao.addUserData(userData);
-		userSubwayDao.addUserSubway(userSubway);
+		//userSubwayDao.addUserSubway(userSubway);
 		
 	}
 	@Override
@@ -87,16 +86,23 @@ public class BasicUserService implements UserService{
 	}
 	
 	@Override
-	public String getUserStationNm(String userId) {
-		return userSubwayDao.getUserSubway(userId).get(0).getStationNm();
-	}
-	@Override
-	public String getUserInOut(String userId) {
-		return userSubwayDao.getUserSubway(userId).get(0).getInOut();
+	public UserSubway getUserSubway(String user_id) {
+		return userSubwayDao.getUserSubway(user_id);
 	}
 	
 	@Override
-	public String getUserLineNum(String userId) {
-		return userSubwayDao.getUserSubway(userId).get(0).getLineNum();
+	public String getUserStationNm(String user_id) {
+		return userSubwayDao.getUserSubway(user_id).getStationNm();
 	}
+	@Override
+	public String getUserInOut(String user_id) {
+		return userSubwayDao.getUserSubway(user_id).getInOut();
+	}
+	
+	@Override
+	public String getUserLineNum(String user_id) {
+		return userSubwayDao.getUserSubway(user_id).getLineNum();
+	}
+	
+	
 }
