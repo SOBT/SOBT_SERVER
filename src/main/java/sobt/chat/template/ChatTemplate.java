@@ -1,5 +1,10 @@
 package sobt.chat.template;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import com.sobt.domain.KakaoUser;
 
 import sobt.api.manage.WeatherApiManager;
@@ -43,22 +48,22 @@ public class ChatTemplate {
 	public MessageVo doChatProcess(KakaoUser kakaoUser) {
 		ChatResult cs = null;
 		ChatCallback chatCallback = null;
-		UserData userData = null;
+		UserData userData = new UserData(kakaoUser.getUser_key(), kakaoUser.getContent(), kakaoUser.getType());
 		boolean update = true;
-		User user = userService.getUser(kakaoUser.getUser_key());
-		if (user == null) {
-			user = new User();
-			user.setUserId(kakaoUser.getUser_key());
-			user.setDefaultStatus();
-			update = false;
-		}else {
-			//시간 확인해서 사용자 상태 초기화.
-			if(checkFiredSession(user)){
-				user.setDefaultStatus();
-			}
-		}
-		userData = new UserData(kakaoUser.getUser_key(), kakaoUser.getContent(), kakaoUser.getType());
+		User user = null;
 		try {
+			user = userService.getUser(kakaoUser.getUser_key());
+			if (user == null) {
+				user = new User();
+				user.setUserId(kakaoUser.getUser_key());
+				user.setDefaultStatus();
+				update = false;
+			}else {
+				//시간 확인해서 사용자 상태 초기화.
+				if(checkFiredSession(user)){
+					throw new ExpireSessionException("세션이 만료되었습니다.");
+				}
+			}
 			if (userData.getUserContent().equals("처음")) {
 				user.setDefaultStatus();
 				Keyboard keyboard = msgService.makeKeyboard("날씨 정보", "지하철 정보", "문장번역");
@@ -75,7 +80,19 @@ public class ChatTemplate {
 			cs = prcsProcessException(user);
 			user = cs.getUser();
 			return cs.getMessageVo();
-		} finally {
+		} catch(ExpireSessionException e){
+			user.setDefaultStatus();
+			MessageVo msgVo = new MessageVo();
+			Message message = msgService.makeMessage("시간이 만료되어 처음상태로 되돌아갑니다.");
+			Keyboard keyboard = msgService.makeKeyboard("날씨 정보", "지하철 정보", "문장번역");
+			msgVo.setKeyboard(keyboard);
+			msgVo.setMessage(message);
+			return msgVo;
+		}catch(ParseException e){
+			throw new RuntimeException();
+			
+		}
+		finally {
 			if (update) {
 				userService.updateUser(user);
 				userService.addUserData(userData);
@@ -133,9 +150,13 @@ public class ChatTemplate {
 		msgVo.setMessage(message);
 		return new ChatResult(user, msgVo);
 	}
-	private boolean checkFiredSession(User user){
-		//ex) rq_Dt : 20170626 210932
-		return false;
+	private boolean checkFiredSession(User user) throws ParseException{
+		Calendar curDtm = Calendar.getInstance();
+		curDtm.add(curDtm.MINUTE, -5);
+		Calendar rqDtm = Calendar.getInstance();
+		rqDtm.setTime(new SimpleDateFormat("yyyyMMdd HHmmss").parse(user.getRqDt()));
+		System.out.println(curDtm.after(rqDtm));
+		return curDtm.after(rqDtm);
 	}
 
 }
