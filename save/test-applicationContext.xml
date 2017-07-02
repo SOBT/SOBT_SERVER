@@ -113,11 +113,9 @@
         <property name = "driverClass" value ="com.mysql.jdbc.Driver"/>
         <property name = "url" value = "jdbc:mysql://localhost:3306/SOBT?useSSL=false&amp;characterEncoding=UTF-8"/>
         <property name = "username" value = "root"/>
-<<<<<<< HEAD:target/classes/test-applicationContext.xml
+
         <property name = "password" value = "song9207108"/>
-=======
         <property name = "password" value = "taek522!"/>
->>>>>>> f1b471afdf7dff63869589c8209a1c2f4f9e8a57:save/test-applicationContext.xml
     </bean>
 
 

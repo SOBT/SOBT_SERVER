@@ -55,6 +55,11 @@ public class ChatTemplate {
 			user.setUserId(kakaoUser.getUser_key());
 			user.setDefaultStatus();
 			update = false;
+		}else {
+			//시간 확인해서 사용자 상태 초기화.
+			if(checkFiredSession(user)){
+				user.setDefaultStatus();
+			}
 		}
 		userData = new UserData(kakaoUser.getUser_key(), kakaoUser.getContent(), kakaoUser.getType());
 		userSubway = new UserSubway(kakaoUser.getUser_key());
@@ -133,6 +138,10 @@ public class ChatTemplate {
 		msgVo.setKeyboard(keyboard);
 		msgVo.setMessage(message);
 		return new ChatResult(user, msgVo);
+	}
+	private boolean checkFiredSession(User user){
+		//ex) rq_Dt : 20170626 210932
+		return false;
 	}
 
 }
