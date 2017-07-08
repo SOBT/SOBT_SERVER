@@ -28,11 +28,11 @@ public class BasicUserService implements UserService{
 		// TODO Auto-generated method stub
 		User user = new User(user_id);
 		UserData userData = new UserData(user_id,content,type);
-		//UserSubway userSubway = new UserSubway(user_id);
+		UserSubway userSubway = new UserSubway(user_id);
 		
 		userDao.addUser(user);
 		userDataDao.addUserData(userData);
-		//userSubwayDao.addUserSubway(userSubway);
+		userSubwayDao.addUserSubway(userSubway);
 		
 	}
 	@Override
@@ -63,6 +63,17 @@ public class BasicUserService implements UserService{
 		// TODO Auto-generated method stub
 		userDataDao.addUserData(userData);
 		
+	}
+	
+	@Override
+	public void updateUser(User user, UserSubway userSubway) {
+		userDao.updateUser(user);
+		userSubwayDao.updateUserSubway(userSubway);
+	}
+	
+	@Override
+	public void updateUserSubway(UserSubway userSubway) {
+		userSubwayDao.updateUserSubway(userSubway);
 	}
 	
 	@Override

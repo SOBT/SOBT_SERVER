@@ -38,6 +38,12 @@ public class JdbcUserSubwayDao implements UserSubwayDao {
 	}
 	
 	@Override
+	public void updateUserSubway(UserSubway userSubway) {
+		this.jdbcTemplate.update(this.sqlService.getSql("updateUserSubway"), 
+				userSubway.getLineNum(), userSubway.getInOut(), userSubway.getStationNm(), userSubway.getUserId());
+	}
+	
+	@Override
 	public void addUserSubway(UserSubway userSubway) {
 		this.jdbcTemplate.update(this.sqlService.getSql("addUserSubway"), 
 				userSubway.getLineNum(), userSubway.getInOut(), userSubway.getStationNm(), userSubway.getUserId());

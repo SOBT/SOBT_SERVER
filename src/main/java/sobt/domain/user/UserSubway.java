@@ -65,5 +65,11 @@ public class UserSubway {
 	public void setUserId(String user_id) {
 		this.user_id = user_id;
 	}
+	
+	public void setDefaultSubway(){
+		this.station_nm = null;
+		this.in_out = null;
+		this.line_num = null;
+	}
 
 }

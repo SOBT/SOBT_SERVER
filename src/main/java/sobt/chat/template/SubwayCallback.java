@@ -5,7 +5,6 @@ import sobt.domain.message.MessageVo;
 import sobt.domain.message.MessageService;
 import sobt.domain.user.SubStatus;
 import sobt.domain.user.User;
-import sobt.domain.user.UserSubway;
 import sobt.user.service.UserService;
 
 import java.io.UnsupportedEncodingException;
@@ -33,7 +32,6 @@ public class SubwayCallback implements ChatCallback{
 	
 	@Override
 	public ChatResult doProcessChat(User user, String text) {
-		UserSubway userSubway = null;
 		MessageVo msgVo = null;
         Message message; 
         if(user.getSubStatus().equals(SubStatus.NORMAL)) {
@@ -45,11 +43,6 @@ public class SubwayCallback implements ChatCallback{
             return new ChatResult(user, msgVo);
             
         } else if(user.getSubStatus().equals(SubStatus.SELECT_SUB_SERVICE)) {
-        	userSubway = userService.getUserSubway(user.getUserId());
-        	if(userSubway == null) {
-        		userSubway = new UserSubway(user.getUserId());
-        		userService.addUserSubway(userSubway);
-        	}
         	msgVo = null;
             if(text.equals("1")) {
             	user.setSubStatus(SubStatus.RT_RESULT);
@@ -142,7 +135,7 @@ public class SubwayCallback implements ChatCallback{
         	} else {
         		user.setSubStatus(SubStatus.FL_SUB_NAME);
             	userService.addUserLineNum(user, text);
-                message = msgService.makeMessage("원하는 지하철역을 입력하세요"
+                message = msgService.makeMessage("원하는 지하철역을 입력하세요\n"
                 		+ "이전단계로 돌아가려면" +"\"이전\"" +"을 입력해주세요");
         	}        	
             msgVo = new MessageVo();
@@ -153,7 +146,7 @@ public class SubwayCallback implements ChatCallback{
         	if(text.equals("이전")) {
         		user.setSubStatus(SubStatus.FL_SUB_NAME);
         		userService.addUserLineNum(user, text);
-                message = msgService.makeMessage("원하는 지하철역을 입력하세요"
+                message = msgService.makeMessage("원하는 지하철역을 입력하세요\n"
                 		+ "이전단계로 돌아가려면" +"\"이전\"" +"을 입력해주세요");
         	} else {
         		int week_tag;
@@ -186,20 +179,4 @@ public class SubwayCallback implements ChatCallback{
 			return week_tag;
 		}
 	}
-	/*
-	private SubStatus checkSubStatus(String text) {
-		if(text.equals("10")) {
-			return SubStatus.SELECT_SUB_SERVICE;
-		} else if(text.equals("12")) {
-			return SubStatus.RT_RESULT;
-		} else if(text.equals("13")) {
-			return SubStatus.FL_SUB_LINE;
-		} else if(text.equals("14")) {
-			return SubStatus.FL_SUB_NAME;
-		} else if(text.equals("15")) {
-			return SubStatus.FL_SUB_INOUT;
-		} else {
-			return SubStatus.NORMAL;
-		}
-	}*/
 }

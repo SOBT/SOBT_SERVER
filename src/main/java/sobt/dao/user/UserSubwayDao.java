@@ -8,6 +8,7 @@ public interface UserSubwayDao {
 	public void addUserLineNum(User user, String line_num);
 	public void addUserInOut(User user, String in_out);
 	public void addUserStationNm(User user, String station_nm);
+	public void updateUserSubway(UserSubway userSubway);
 	
 	public UserSubway getUserSubway(String userId);
 }

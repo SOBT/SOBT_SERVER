@@ -7,11 +7,13 @@ import sobt.domain.user.UserSubway;
 public interface UserService {
 	public void addUser(String user_id, String content, String type);
 	public void updateUser(User user);
+	public void updateUser(User user, UserSubway userSubway);
 	public void addUser(User user , UserData userData);
 	public void addUser(User user, UserData userData, UserSubway userSubway);
 	public User getUser(String id);
 	public void addUserData(UserData userData);
 	
+	public void updateUserSubway(UserSubway userSubway);
 	public void addUserSubway(UserSubway userSubway);
 	public void addUserLineNum(User user, String line_num);
 	public void addUserInOut(User user, String in_out);

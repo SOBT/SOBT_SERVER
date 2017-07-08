@@ -15,6 +15,7 @@ import sobt.domain.message.MessageVo;
 import sobt.domain.user.Status;
 import sobt.domain.user.User;
 import sobt.domain.user.UserData;
+import sobt.domain.user.UserSubway;
 import sobt.user.service.UserService;
 
 public class ChatTemplate {
@@ -51,12 +52,14 @@ public class ChatTemplate {
 		UserData userData = new UserData(kakaoUser.getUser_key(), kakaoUser.getContent(), kakaoUser.getType());
 		boolean update = true;
 		User user = null;
+		UserSubway userSubway = null;
 		try {
-			user = userService.getUser(kakaoUser.getUser_key());
+			user = userService.getUser(kakaoUser.getUser_key());			
 			if (user == null) {
 				user = new User();
 				user.setUserId(kakaoUser.getUser_key());
 				user.setDefaultStatus();
+				userSubway = new UserSubway(kakaoUser.getUser_key());
 				update = false;
 			}else {
 				//시간 확인해서 사용자 상태 초기화.
@@ -82,6 +85,7 @@ public class ChatTemplate {
 			return cs.getMessageVo();
 		} catch(ExpireSessionException e){
 			user.setDefaultStatus();
+			userSubway.setDefaultSubway();
 			MessageVo msgVo = new MessageVo();
 			Message message = msgService.makeMessage("시간이 만료되어 처음상태로 되돌아갑니다.");
 			Keyboard keyboard = msgService.makeKeyboard("날씨 정보", "지하철 정보", "문장번역");
@@ -97,7 +101,7 @@ public class ChatTemplate {
 				userService.updateUser(user);
 				userService.addUserData(userData);
 			} else {
-				userService.addUser(user, userData);
+				userService.addUser(user, userData, userSubway);
 			}
 		}
 

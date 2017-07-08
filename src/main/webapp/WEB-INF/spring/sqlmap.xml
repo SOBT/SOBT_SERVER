@@ -3,8 +3,12 @@
 				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 				xsi:schemaLocation="http://www.epril.com/sqlmap ../../../../../sqlmap.xsd ">
 
+    <!-- WeatherData 관련 sql-->
+    <sql key = "addWeatherData">INSERT INTO WEATHER_DATA(WEATHER_DATE, WEATHER_INFO) VALUES(?,?)</sql>
+    <sql key = "getWeatherData">SELECT WEATHER_DATE, WEATHER_INFO FROM WEATHER_DATA WHERE WEATHER_DATA.WEATHER_DATE = ?</sql>
 
     <!-- USER_SUBWAY 관련 sql -->
+    <sql key = "updateUserSubway">UPDATE USER_SUBWAY SET LINE_NUM = ? , IN_OUT = ? STATION_NM = ? FROM USER_SUBWAY WHERE USER_ID = ?</sql>
     <sql key = "addUserSubway">INSERT INTO USER_SUBWAY(LINE_NUM,IN_OUT,STATION_NM,USER_ID) VALUES(?,?,?,?) </sql>
     <sql key = "addUserLineNum">UPDATE USER_SUBWAY SET LINE_NUM = ? WHERE USER_ID = ? </sql>
     <sql key = "addUserInOut">UPDATE USER_SUBWAY SET IN_OUT = ? WHERE USER_ID = ? </sql>
