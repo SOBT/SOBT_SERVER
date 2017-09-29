@@ -161,3 +161,28 @@ jdbcTemplate.queryForObject(this.sqlService.getSql("getUser"),new Object[]{userI
 
 </code></pre>
 
+## Quartz 사용방법 (BackGround Scheduler)
+<pre><code>
+    root-context에서 
+
+    id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"
+          p:jobDetail-ref="weatherJob"
+          p:startDelay="1000"
+          p:cronExpression="0 0 16 * * ?"/>
+
+          cronExpression 표현식으로 실행 시간 설정
+
+          예) 
+            예를들어 2016년 11월 20일 오후 2시(14시) 10분 36초에 실행하려고 합니다.
+            자바기반 yyyy-MM-dd HH:mm:ss 로 표현하면 2016-11-20 14:10:36 입니다.
+            크론 표현식으로 표현한다면 아래와 같습니다.
+            36 10 14 20 11 ? 2016
+            - 여기서 보이는 ? 는 설정값 없음으로 오직 일[day-of-month:1-31], 요일[day-of-week:0-6]에서만 사용 가능합니다.
+            좀 더 응용해서 매년 11월 20일 오후 2시(14시) 10분 36초 에 실행하려고한다면 아래와 같이 표현할 수 있습니다.
+            36 10 14 20 11 ? * 혹은 36 10 14 20 11 ?
+            스프링 스케줄러와 쿼츠에서는 연도를 생략할 수 있습니다.
+            또한 *는 모든조건 즉, 와일드카드입니다.
+
+</code></pre>
+
+
