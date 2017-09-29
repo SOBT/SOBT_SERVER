@@ -6,4 +6,6 @@ public interface WeatherApiManager {
 	public String getWeatherMin(String city, String county, String village);
 	
 	public String getWeatherAll();
+	
+	public void addWeatherAll();
 }

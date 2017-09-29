@@ -1,7 +1,8 @@
 package sobt.api.manage;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -24,7 +25,6 @@ public class BasicWeatherApiManager implements WeatherApiManager{
 	private String appKey;
 	private WeatherDataDao weatherDataDao;
 	
-	
 	public void setAppkey(String appkey){
 		this.appKey = appkey;
 	}
@@ -32,11 +32,10 @@ public class BasicWeatherApiManager implements WeatherApiManager{
 	public void setParserService(ParserService parserService){
 		this.parserService = parserService;
 	}
+	
 	public void setHttpService(HttpService httpService){
 		this.httpService = httpService;
 	}
-	
-	
 	
 	public void setWeatherDataDao(WeatherDataDao weatherDataDao) {
 		this.weatherDataDao = weatherDataDao;
@@ -62,5 +61,27 @@ public class BasicWeatherApiManager implements WeatherApiManager{
 		
 		return data.getSentence();
 	}
+	
+	@Override
+	public void addWeatherAll() {
+		
+		WeatherData data = new WeatherData();
+		Date date = new Date();
+		parserService = new WeatherAllPlaceParser();
+		
+		Calendar cal = Calendar.getInstance();
+		
+		cal.setTime(date);
+		
+		cal.add(Calendar.DATE, 3);
+		
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		data.setDate(sdf.format(cal.getTime()));
+		data.setSentence(parserService.Parse(httpService.doHttpGet(SOBTConstant.WEATHER_API_URL_ALL)));
+		
+		weatherDataDao.addWeather(data);
+	}
+	
 
 }

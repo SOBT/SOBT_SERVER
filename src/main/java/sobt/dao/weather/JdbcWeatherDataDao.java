@@ -43,7 +43,11 @@ public class JdbcWeatherDataDao implements WeatherDataDao{
 	@Override
 	public void addWeather(WeatherData weatherData) {
 		// TODO Auto-generated method stub
-		this.jdbcTemplate.update(this.sqlService.getSql("addWeatherData"),weatherData.getDate(), weatherData.getSentence());
+//		this.jdbcTemplate.update(this.sqlService.getSql("addWeatherData"),weatherData.getDate(), weatherData.getSentence());
+		this.jdbcTemplate.update("INSERT INTO WEATHER_DATA(WEATHER_DATE, WEATHER_INFO) VALUES(?,?)",
+								 weatherData.getDate(),
+								 weatherData.getSentence());
+		
 		
 	}
 
